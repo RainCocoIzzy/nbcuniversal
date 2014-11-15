@@ -11,6 +11,19 @@ var maindown = false;
 
 var colors = ["#EC4C3C","#E67E22","#F1C40E","#aaaaaa"]
 
+var swiping=false;
+var animDir='up';
+var animating = false;
+var startX=0;
+var startY=0;
+
+var mainimg;
+var mainimg2;
+
+var swipeTime=0;
+var hold = false;
+var drag = false;
+
 function Rect(x,y,w,h){
     this.x=x;
     this.y=y;
@@ -34,7 +47,6 @@ function updateEmptySlots(){
     if(found){
         updateEmptySlots();
     }
-
 }
 
 function shiftSlots(index){
@@ -83,7 +95,7 @@ function enterframe(){
         updateEmptySlots(0);
     }
     updateSlots();
-    var mvspd=3;
+    var mvspd=5;
     for(var i =0;i<squares.length;i++){
         var square = squares[i];
         if(!square.down){
@@ -97,6 +109,70 @@ function enterframe(){
             square.css('top',newY+'px');
         }
     }
+
+    if(hold){
+        swipeTime++;
+        var waitTime=30;
+        if(swipeTime>waitTime){
+            swiping=false;
+            if(!drag){
+                createSquare(startX,startY);
+                drag=true;
+            }
+        }
+    }
+
+    if(animating){
+        var toY = -500;
+        if(animDir=="down"){
+            toY=500;
+        }
+        var loc = convertPxToInt(mainimg.css('top'));
+        var newLoc =loc-Math.ceil((loc-toY)/mvspd);
+        mainimg.css('top',newLoc);
+
+        var loc2 = convertPxToInt(mainimg2.css('top'));
+        if(animDir=="up"){
+            var newLoc =loc2-Math.ceil((loc2)/mvspd);
+        } else {
+            var newLoc =loc2-Math.floor((loc2)/mvspd);
+        }
+        mainimg2.css('top',newLoc);
+        if(newLoc==0){
+            animating=false;
+            mainimg.css('top',0);
+            mainimg2.css('top',0);
+            mainimg2.css('display','none');
+            swiping=false;
+        }
+    } else {
+        if(!swiping){
+            var topInt = convertPxToInt(mainimg.css('top'));
+            mainimg.css('top',(topInt)/mvspd+'px');
+        }
+    }
+}
+
+
+function createSquare(sx,sy){
+    var square = document.createElement("div");
+    document.body.appendChild(square);
+    square.setAttribute('class','square');
+    var name = 'square'+Math.round(Math.random()*1000000);
+    square.setAttribute('id',name);
+    var square = $('#'+name);
+    square.down=true;
+    square.diffX=25;
+    square.diffY=25;
+    square.toX=startX;
+    square.toY=startY;
+    square.lastIndex=-1;
+    square.width=50;
+    square.height=50;
+    square.css('background',colors[0]);
+    square.css('left',(sx-25)+'px');
+    square.css('top',(sy-25)+'px');
+    squares.push(square);
 }
 
 $(document).ready(function(){
@@ -111,36 +187,16 @@ $(document).ready(function(){
         $(document).on({ 'mouseup' : touchend});
     }
 
-    for(var i =0; i<4; i++){
-        var square = document.createElement("div");
-        document.body.appendChild(square);
-        square.setAttribute('class','square');
-        square.setAttribute('id','square'+i);
-        var square = $('#square'+i);
-        square.down=false;
-        square.diffX=0;
-        square.diffY=0;
-        square.toX=mainspotx;
-        square.toY=mainspoty;
-        if(i==3){
-            square.lastIndex=-1;
-        } else {
-            square.lastIndex=i;
-            slots[i]=square;
-        }
-        square.width=50;
-        square.height=50;
-        square.css('background',colors[i]);
-        square.css('top',i+'00px');
-        squares.push(square);
-    }
-
-    for(var i =1;i<6;i++){
+    for(var i =1;i<5;i++){
         var spot = $('#spot'+i);
         var topInt = convertPxToInt(spot.css('top'));
         var leftInt = convertPxToInt(spot.css('left'));
         spots.push (new Rect(leftInt,topInt,100,100));
     }
+
+    mainimg = $("#mainimg");
+    mainimg2 = $("#mainimg2");
+    mainimg2.css('display','none');
 
     window.setInterval(enterframe,10);
 });
@@ -152,39 +208,74 @@ function touch(ev){
     if(maindown){
         return;
     }
+    if(prod){
+        startX = ev.originalEvent.touches[0].pageX;
+        startY = ev.originalEvent.touches[0].pageY;
+    } else {
+        startX = ev.pageX;
+        startY = ev.pageY;
+    }
     for(var i =0;i<squares.length;i++){
         var square = squares[i];
         var topInt = convertPxToInt(square.css('top'));
         var leftInt = convertPxToInt(square.css('left'));
-        if(prod){
-                square.diffX = ev.originalEvent.touches[0].pageX - leftInt;
-                square.diffY = ev.originalEvent.touches[0].pageY - topInt;
-        } else {
-                square.diffX = ev.pageX - leftInt;
-                square.diffY = ev.pageY - topInt;
-        }
+        square.diffX = startX - leftInt;
+        square.diffY = startY - topInt;
         if(square.diffX>0 && square.diffY>0 && square.diffX<square.width && square.diffY<square.height){
             square.down=true;
             maindown=true;
             return;
         }
     }
+    if(startX>150){
+        swiping=true;
+        hold=true;
+    }
 }
 
 function touchmove(ev){
     ev.preventDefault();
+    var ex;
+    var ey;
+    if(prod){
+        ex = ev.originalEvent.touches[0].pageX;
+        ey = ev.originalEvent.touches[0].pageY;
+    } else {
+        ex = ev.pageX;
+        ey = ev.pageY;
+    }
+
+    if(animating){
+    } else {
+        if(swiping){
+            var minmove = 10;
+            if(Math.abs(ey-startY)>minmove){
+                hold=false;
+            }
+            var miny = -250;
+            var maxy = 250
+            mainimg.css('top',ey-startY);
+            if(ey-startY<miny){
+                animating=true;
+                animDir="up";
+                mainimg2.css('top',500);
+                mainimg2.css('display','block');
+            } else if(ey-startY>maxy){
+                animating=true;
+                animDir="down";
+                mainimg2.css('top',-500);
+                mainimg2.css('display','block');
+            }
+        }
+    }
+
     for(var i =0;i<squares.length;i++){
         var square = squares[i];
         if(square.down){
             var newX;
             var newY;
-            if(prod){
-                newX = ev.originalEvent.touches[0].pageX-square.diffX;
-                newY = ev.originalEvent.touches[0].pageY-square.diffY;
-            } else {
-                newX = ev.pageX-square.diffX;
-                newY = ev.pageY-square.diffY;
-            }
+            newX = ex-square.diffX;
+            newY = ey-square.diffY;
             square.css('left',newX+'px');
             square.css('top',newY+'px');
             var slotIndex = getClosestSlot(newX+square.width/2,newY+square.height/2);
@@ -224,6 +315,15 @@ function touchend(ev){
     for(var i =0;i<squares.length;i++){
         var square = squares[i];
         square.down=false;
+        if(square.lastIndex==-1 || square.lastIndex==3){
+            squares.splice(i,1);
+            square.remove();
+            i--;
+        }
     }
     maindown=false;
+    swiping=false;
+    swipeTime=0;
+    drag=false;
+    hold=false;
 }
