@@ -44,17 +44,17 @@ function createPNG(sources, titles) {
     loadImages(sources, function(images) {
 
         //First
-        ctx.drawImage(images.first, 0, 0, cw, images.first.height, pad, pad, cw/2-pad, ch-pad2);
+        ctx.drawImage(images.first, 0, 0, cw, images.first.height, pad, pad, cw*(3/5)-pad, ch-pad2);
         ctx.fillText(titles[0],cw/6,ch-pad*5);
         
         ctx.fillStyle="#E74C3C";
-        ctx.moveTo(cw/2,ch-pad);
-        ctx.lineTo(cw/2,ch-pad*13);
-        ctx.lineTo(cw/2-pad*12,ch-pad);
+        ctx.moveTo(cw*(3/5),ch-pad);
+        ctx.lineTo(cw*(3/5),ch-pad*13);
+        ctx.lineTo(cw*(3/5)-pad*12,ch-pad);
         ctx.fill();
 
         //Second
-        ctx.drawImage(images.second, 0, 0, cw, images.second.height, cw/2+pad, pad, 320,ch*(3/5)-pad);
+        ctx.drawImage(images.second, 0, 0, images.second.width, images.second.height, cw*(3/5)+pad, pad, cw*(3/5)-120, ch*(3/5)-pad);
         ctx.fillStyle="white";
         ctx.fillText(titles[1],cw*(4/6),ch*(3/5)-pad*5);
         
@@ -66,7 +66,7 @@ function createPNG(sources, titles) {
         ctx.fill();
         
         //Third
-        ctx.drawImage(images.third, 0, 0, images.third.width, ch, cw/2+pad, ch*(3/5)+pad, cw/2-pad2, ch*(2/5)-pad2);
+        ctx.drawImage(images.third, 0, 0, images.third.width, images.third.height, cw*(3/5)+pad, ch*(3/5)+pad, cw*(3/5)-120, ch*(2/5)-pad2);
         ctx.fillStyle="white";
         ctx.fillText(titles[2],cw*(4/6),ch-pad*5);
         
