@@ -1,0 +1,17 @@
+.tospot {
+    width:100px;
+    height:100px;
+    background:#ff00ee;
+    border:2px solid white;
+    position:absolute;
+    left:20px;
+}
+
+.square {
+    background:#ccc;
+    width:50px;
+    height:50px;
+    position:absolute;
+    left:0px;
+    top:20px;
+}
