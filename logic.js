@@ -66,7 +66,7 @@ function getClosestSlot(x,y){
         var xd = spot.centerx-x;
         var yd= spot.centery-y;
         var d = xd*xd+yd*yd;
-        var radius = 50;
+        var radius = 80;
         if(d<radius*radius){
             if(d<closestDist || closestIndex==-1){
                 closestIndex=i;
@@ -135,7 +135,7 @@ function enterframe(){
         if(animDir=="up"){
             var newLoc =loc2-Math.ceil((loc2)/mvspd);
         } else {
-            var newLoc =loc2-Math.floor((loc2)/mvspd);
+            var newLoc =loc2+Math.ceil((-loc2)/mvspd);
         }
         mainimg2.css('top',newLoc);
         if(newLoc==0){
