@@ -315,8 +315,8 @@ $(document).ready(function(){
             $(synopsisDiv).css("opacity","1");
         }
     });
-    $("#goToCanvas").on('click',function(){
-        window.location = "./index.php?m1="+slots[0].id+"&m2="+slots[1].id+"&m3="+slots[2].id;
+    $("#goToCanvas").on('click touchstart',function(){
+        window.location = "./index.php?m1="+slots[0].movie.id+"&m2="+slots[1].movie.id+"&m3="+slots[2].movie.id;
     });
 
     if(prod){
