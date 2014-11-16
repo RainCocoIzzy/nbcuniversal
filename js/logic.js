@@ -171,6 +171,7 @@ function enterframe(){
         if(!firstMovie){
             setMovie(mainimg,currMovie);
             firstMovie=true;
+            $("body").css('display','block');
         }
     }
     if(!maindown){
@@ -292,7 +293,8 @@ $(document).ready(function(){
     mainimg2.css('display','none');
 
     window.setInterval(enterframe,10);
-
+    
+    $("body").css('display','none');
 });
 
 
