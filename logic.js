@@ -474,7 +474,6 @@ function touchend(ev){
                     setMovie(mainimg,currMovie);
                 }
                 mainimg.css('display','block');
-                movies.splice(currMovie,0,square.movie);
             } else {
                 prevMovie();
                 animating=true;
