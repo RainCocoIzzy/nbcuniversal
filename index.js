@@ -23,7 +23,9 @@ function createMovie(num,title,rating,photo,id){
     movie.img;//
     imgs[num-1] = "./lib/image"+id+".png";
     movie.id=id;
-    var post = 'savelib.php?loc='+movie.id+'&url='+photo;
+    var rejoin =photo.split(" ").join("%20");
+    var post = 'savelib.php?loc='+movie.id+'&url='+rejoin;
+    console.log(rejoin);
     $.ajax({type:'GET',url:post,success:loadRealImg});
     movies[num-1]=movie;
     console.log(imgs[num-1]);
