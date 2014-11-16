@@ -20,11 +20,10 @@ function fb_login() {
 }
 
 function fb_publish() {
-        //method: 'feed',
-        //href: 'https://www.facebook.com/dialog/feed?app_id=717277388349929&display=popup&caption=An%20example%20caption&width=50&link=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2F&redirect_uri='+imgURL,
     FB.ui({
         method: 'feed',
-        link: imgURL,
+        link: 'http://danny-yaroslavski.com/dragdrop/landingpage.html',
+        picture: imgURL,
         caption: '#Top3IWantToSee',
     }, function(response){});
 }
@@ -150,36 +149,3 @@ function createPNG(sources, titles) {
     });
 }
 
-function createLanding() {
-
-    $(".buynow").click( function() {
-    });
-
-    var firstMovie = { img:'images/img1.jpg',title:'Big Hero 6',url:'http://',rating:'5'};
-    var secondMovie = { img:'images/img2.jpg',title:'Mockingjay',url:'http://',rating:'5'};
-    var thirdMovie = { img:'images/img3.jpg',title:'Horrible Bosses',url:'http://',rating:'5'};
-
-    var movies = [firstMovie,secondMovie,thirdMovie];
-
-    var first = $("#first");
-    var second = $("#second");
-    var third = $("#third");
-
-    var divs = [first,second,third];
-
-    for(var i = 0; i < 3; i++) {
-        $(divs[i]).css('background-image','url('+movies[i].img+')')
-                .find('.title').html(movies[i].title);
-                generateStars( $(divs[i]).find('.stars'), movies[i].rating );
-                }
-                }
-
-                function generateStars(div,rating) {
-                    rating = parseInt(rating);
-                    for(var i = 1; i < rating; i++) {
-                        var img = document.createElement("img");
-                        img.src = 'images/star.png';
-
-                        div.append(img);
-                    }
-                }
