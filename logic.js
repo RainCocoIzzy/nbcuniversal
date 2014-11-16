@@ -543,9 +543,11 @@ function loadVideo(movieId){
             for(var i = 0;i<$(vidurl).children().length;i++){
                 var vid = $(vidurl).children().eq(i).get(0);
                 var attr = $(vid).attr('type');
+                //alert(attr);
                 if(attr=="Trailer"){
-                    var vidhttp = $(vid).children().eq(1).get(0).innerHTML;
-                    console.log(vidhttp);
+                    var vidhttp = $(vid).children().eq(1).text();
+                    //console.log($(vid).children().eq(1).text());
+                    //alert(vidhttp);
                     $("#playbtn").attr('src',vidhttp);
                 }
             }
