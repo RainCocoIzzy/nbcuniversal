@@ -1,4 +1,4 @@
-var prod = true;
+var prod = false;
 var squares = [];
 var spots = [];
 
@@ -34,6 +34,7 @@ var currMovie2 = 0;
 
 var startedAll = false;
 var firstMovie = false;
+
 
 function Rect(x,y,w,h){
     this.x=x;
@@ -305,6 +306,7 @@ function createSquare(sx,sy){
     squares.push(square);
 }
 
+
 $(document).ready(function(){
     mainTitleDiv = $("#mainTitle");
     mainGenreDiv = $("#mainGenre");
@@ -329,7 +331,13 @@ $(document).ready(function(){
     $("#goToCanvas").on('click touchstart',function(){
         location.href = "./second.php?m1="+slots[0].movie.id+"&m2="+slots[1].movie.id+"&m3="+slots[2].movie.id;
     });
+function fullscreenit(){
+    //$("#playbtn").requestFullScreen();
+    var video = document.getElementById('playbtn');
+    video.webkitEnterFullscreen();
+}
 
+    $("#playbtn").on({'click touchstart':fullscreenit});
     if(prod){
         $(document).on({ 'touchstart' : touch});
         $(document).on({ 'touchmove' : touchmove});
