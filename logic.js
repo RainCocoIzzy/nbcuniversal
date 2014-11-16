@@ -2,6 +2,9 @@ var prod = true;
 var squares = [];
 var spots = [];
 
+var finalSquareH;
+var finalSquareW;
+
 var slots = [null,null,null,null];
 
 var mainspotx = 200;
@@ -72,7 +75,8 @@ function setMovie(div,movieNum){
     if(currMovieObj.loadedImage){
         div.css('background-image',"url('"+currMovieObj.imageObj.src+"')");
         mainTitleDiv.html( currMovieObj.title );
-        synopsysDiv.html( currMovieObj.synopsys );
+        console.log(currMovieObj.synopsis);
+        synopsisDiv.html( currMovieObj.synopsis );
         updateRating( starRatingsDiv, currMovieObj.rating);
     }
 }
@@ -150,7 +154,7 @@ function getClosestSlot(x,y){
         var xd = spot.centerx-x;
         var yd= spot.centery-y;
         var d = xd*xd+yd*yd;
-        var radius = 80;
+        var radius = 100;
         if(d<radius*radius){
             if(d<closestDist || closestIndex==-1){
                 closestIndex=i;
@@ -194,10 +198,16 @@ function enterframe(){
         if(!square.down){
             var topInt = convertPxToInt(square.css('top'));
             var leftInt = convertPxToInt(square.css('left'));
-            var xd = square.toX-leftInt;
-            var yd = square.toY-topInt;
-            var newX = xd/mvspd+leftInt;
-            var newY = yd/mvspd+topInt;
+            var xd = (square.toX-leftInt)/mvspd;
+            var yd = (square.toY-topInt)/mvspd;
+            if(Math.abs(xd)<1 && Math.abs(xd)!=0){
+                xd=xd<0?-1:1;
+            }
+            if(Math.abs(yd)<1 && Math.abs(yd)!=0){
+                yd=yd<0?-1:1;
+            }
+            var newX = leftInt+xd;
+            var newY = topInt+yd;
             square.css('left',newX+'px');
             square.css('top',newY+'px');
         }
@@ -266,26 +276,34 @@ function createSquare(sx,sy){
     square.movie = movies[currMovie];
     movies.splice(currMovie,1);
     square.down=true;
-    square.diffX=25;
-    square.diffY=25;
+    square.diffX=finalSquareW/2;
+    square.diffY=finalSquareH/2;
     square.toX=startX;
     square.toY=startY;
     square.lastIndex=-1;
-    square.width=50;
-    square.height=50;
-    square.css('background',colors[0]);
-    square.css('left',(sx-25)+'px');
-    square.css('top',(sy-25)+'px');
+    square.width=finalSquareW;
+    square.height=finalSquareH;
+    square.css('background-image',"url('"+square.movie.imageObj.src+"')");
+    square.css('left',(sx-square.diffX)+'px');
+    square.css('top',(sy-square.diffY)+'px');
     squares.push(square);
 }
 
 $(document).ready(function(){
     mainTitleDiv = $("#mainTitle");
-    synopsysDiv = $("#synopsys");
+    synopsisDiv = $("#synopsis");
     starRatingsDiv = $("#mainRating");
-   
-    $("#info").on('click touchstart', function() {
-        $(this).css({"border":"0","transform":"scale(100)"});
+    finalSquareH = $("#spot1").height();
+    finalSquareW = $("#spot1").width();
+
+    $("#iinfo").on('click touchstart', function() {
+        if( $(synopsisDiv).css("opacity") == "1") {
+            $("#info").css({"transform":"scale(1)","-webkit-transform":"scale(1)","-moz-transform": "scale(1)","-ms-transform":"scale(1)","-o-transform":"scale(1)"});
+            $(synopsisDiv).css("opacity","0");
+        } else {
+            $("#info").css({"transform":"scale(100)","-webkit-transform":"scale(100)","-moz-transform": "scale(100)","-ms-transform":"scale(100)","-o-transform":"scale(100)"});
+            $(synopsisDiv).css("opacity","1");
+        }
     });
 
     if(prod){
@@ -303,7 +321,7 @@ $(document).ready(function(){
         var spot = $('#spot'+i);
         var topInt = convertPxToInt(spot.css('top'));
         var leftInt = convertPxToInt(spot.css('left'));
-        spots.push (new Rect(leftInt,topInt,100,100));
+        spots.push (new Rect(leftInt,topInt+(i-1)*3,100,100));
     }
 
     mainimg = $("#mainimg");
@@ -431,6 +449,7 @@ function touchend(ev){
     for(var i =0;i<squares.length;i++){
         var square = squares[i];
         if(square.down){
+            square.css({'height':finalSquareH,'width':finalSquareW});
             if(square.lastIndex==-1){
                 if(movies[currMovie]!=square.movie){
                     movies.splice(currMovie,0,square.movie);
