@@ -21,7 +21,7 @@ function createMovie(num,title,rating,photo,id){
     var movie = new Movie();
     movie.title=title;
     movie.img;//
-    imgs[num-1] ="./lib/image"+id+".png";
+    imgs[num-1] = "./lib/image"+id+".png";
     movie.id=id;
     var post = 'savelib.php?loc='+movie.id+'&url='+photo;
     $.ajax({type:'GET',url:post,success:loadRealImg});
@@ -32,7 +32,7 @@ function createMovie(num,title,rating,photo,id){
 function loadRealImg(){
     responses++;
     if(responses==3){
-        var sources = { first: imgs[0], second: imgs[1], third:imgs[2]};
+        var sources = { first: imgs[0], second: imgs[1], third:imgs[2], firstplace:'images/first.png',secondplace:'images/second.png',thirdplace:'images/third.png'};
         var titles = [movies[0].title,movies[1].title,movies[2].title];
         createPNG(sources, titles);
 
@@ -129,38 +129,23 @@ function createPNG(sources, titles) {
 
 
     loadImages(sources, function(images) {
+        //First
         ctx.drawImage(images.first, 0, 0, images.first.width, images.first.height, pad, pad, cw*(3/5)-pad, ch-pad2);
+        ctx.fillStyle="white";
         ctx.fillText(titles[0],cw/6,ch-pad*5);
-
-        ctx.fillStyle="#E74C3C";
-        ctx.moveTo(cw*(3/5),ch-pad);
-        ctx.lineTo(cw*(3/5),ch-pad*13);
-        ctx.lineTo(cw*(3/5)-pad*12,ch-pad);
-        ctx.fill();
+        ctx.drawImage(images.firstplace, cw*(3/5)-images.firstplace.width, ch-pad-images.firstplace.height);
 
         //Second
         ctx.drawImage(images.second, 0, 0, images.second.width, images.second.height, cw*(3/5)+pad, pad, cw*(3/5)-120, ch*(3/5)-pad);
         ctx.fillStyle="white";
         ctx.fillText(titles[1],cw*(4/6),ch*(3/5)-pad*5);
-
-        ctx.fillStyle="#E67E22";
-        ctx.beginPath();
-        ctx.moveTo(cw-pad,ch*(3/5));
-        ctx.lineTo(cw-pad,ch*(3/5)-12*pad);
-        ctx.lineTo(cw-13*pad,ch*(3/5));
-        ctx.fill();
+        ctx.drawImage(images.secondplace, cw-pad-images.secondplace.width, ch*(3/5)-images.secondplace.height);
 
         //Third
         ctx.drawImage(images.third, 0, 0, images.third.width, images.third.height, cw*(3/5)+pad, ch*(3/5)+pad, cw*(3/5)-120, ch*(2/5)-pad2);
         ctx.fillStyle="white";
         ctx.fillText(titles[2],cw*(4/6),ch-pad*5);
-
-        ctx.fillStyle="#F1C40F";
-        ctx.beginPath();
-        ctx.moveTo(cw-pad,ch-pad);
-        ctx.lineTo(cw-pad,ch-pad*12);
-        ctx.lineTo(cw-pad*12,ch-pad);
-        ctx.fill();
+        ctx.drawImage(images.thirdplace, cw-pad-images.thirdplace.width, ch-pad-images.thirdplace.height);
 
         var finalImg = canvas.toDataURL("image/png");
         var ajax = new XMLHttpRequest();
