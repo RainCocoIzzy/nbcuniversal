@@ -7,7 +7,7 @@ var finalSquareW;
 
 var slots = [null,null,null,null];
 
-var mainspotx = 200;
+var mainspotx;
 var mainspoty = 0;
 
 var maindown = false;
@@ -146,7 +146,7 @@ function shiftSlots(index){
     }
 }
 
-function getClosestSlot(x,y){
+function getClosestSlot(x,y,w){
     var closestDist = -1;
     var closestIndex = -1;
     for(var i =0;i<3;i++){
@@ -154,7 +154,10 @@ function getClosestSlot(x,y){
         var xd = spot.centerx-x;
         var yd= spot.centery-y;
         var d = xd*xd+yd*yd;
-        var radius = 100;
+        var radius=100;
+        if(w==finalImgW){
+            radius=300;
+        }
         if(d<radius*radius){
             if(d<closestDist || closestIndex==-1){
                 closestIndex=i;
@@ -276,13 +279,13 @@ function createSquare(sx,sy){
     square.movie = movies[currMovie];
     movies.splice(currMovie,1);
     square.down=true;
-    square.diffX=finalSquareW/2;
-    square.diffY=finalSquareH/2;
+    square.diffX=sx-mainspotx;
+    square.diffY=sy-mainspoty;
     square.toX=startX;
     square.toY=startY;
     square.lastIndex=-1;
-    square.width=finalSquareW;
-    square.height=finalSquareH;
+    square.width=finalImgW;
+    square.height=finalImgH;
     square.css('background-image',"url('"+square.movie.imageObj.src+"')");
     square.css('left',(sx-square.diffX)+'px');
     square.css('top',(sy-square.diffY)+'px');
@@ -295,6 +298,11 @@ $(document).ready(function(){
     starRatingsDiv = $("#mainRating");
     finalSquareH = $("#spot1").height();
     finalSquareW = $("#spot1").width();
+    finalImgW = $("#mainimg").width();
+    finalImgH = $("#mainimg").height();
+
+    mainspotx = $("#mainimg").offset().left;
+    console.log(mainspotx);
 
     $("#iinfo").on('click touchstart', function() {
         if( $(synopsisDiv).css("opacity") == "1") {
@@ -337,6 +345,7 @@ $(document).ready(function(){
 
 function touch(ev){
     ev.preventDefault();
+    $(".spotimg").css("opacity","0");
     if(maindown){
         return;
     }
@@ -412,7 +421,7 @@ function touchmove(ev){
             newY = ey-square.diffY;
             square.css('left',newX+'px');
             square.css('top',newY+'px');
-            var slotIndex = getClosestSlot(newX+square.width/2,newY+square.height/2);
+            var slotIndex = getClosestSlot(newX+square.width/2,newY+square.height/2,square.width);
             var lastIndex = square.lastIndex;
             updateEmptySlots();//lastIndex);
             if(slotIndex == lastIndex){
@@ -446,10 +455,14 @@ function touchmove(ev){
 
 function touchend(ev){
     ev.preventDefault();
+    $(".spotimg").css("opacity","1");
     for(var i =0;i<squares.length;i++){
         var square = squares[i];
         if(square.down){
             square.css({'height':finalSquareH,'width':finalSquareW});
+            square.width=finalSquareW;
+            square.height=finalSquareH;
+
             if(square.lastIndex==-1){
                 if(movies[currMovie]!=square.movie){
                     movies.splice(currMovie,0,square.movie);

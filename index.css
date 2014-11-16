@@ -30,6 +30,7 @@
 width: 20%;
 height: calc(30% - 15px);
 position: absolute;
+left:5px;
 }
 
 .square {
@@ -39,6 +40,13 @@ position: absolute;
     position:absolute;
     left:0px;
     top:20px;
+    background-size:100% 100%;
+    background-repeat:no-repeat;
+    -webkit-transition: width 0.5s, height 0.5s;
+        -moz-transition: width 0.5s, height 0.5s;
+            -o-transition: width 0.5s, height 0.5s;
+                transition: width 0.5s, height 0.5s;
+    
 }
 
 .imgContainer {
@@ -57,6 +65,20 @@ position: absolute;
     left:0;
     background: #cccddd;
     background-repeat:no-repeat;
+}
+
+.spotimg {
+    z-index: 4;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    opacity:0;
+    -webkit-transition: opacity 0.5s;
+        -moz-transition: opacity 0.5s;
+            -o-transition: opacity 0.5s;
+                transition: opacity 0.5s;
+    -webkit-transition-delay: 0s; /* Safari */
+        transition-delay: 0s;
 }
 
 .info {
@@ -293,7 +315,7 @@ margin-right: 10px;
 }
 
 
-#first, #second, #third {
+.first, .second, .third {
     -webkit-animation:pop-in 0.4s;
     -moz-animation:pop-in 0.4s;
     -ms-animation:pop-in 0.4s;
@@ -304,12 +326,12 @@ margin-right: 10px;
     animation-fill-mode:forwards; /*when the spec is finished*/
 }
 
-#second {
+.secondDelay {
     -webkit-animation-delay: 0.2s; /* Chrome, Safari, Opera */
     animation-delay: 0.2s;
 }
 
-#third {
+.thirdDelay {
     -webkit-animation-delay: 0.4s; /* Chrome, Safari, Opera */
     animation-delay: 0.4s;
 }
