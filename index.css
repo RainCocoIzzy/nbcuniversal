@@ -4,7 +4,9 @@
     bottom:0;
     width:100%;
     width: calc(80% - 10px);
+    width: -webkit-calc(80% - 10px);
     left: calc(20% + 10px);
+    left: -webkit-calc(20% + 10px);
 
     z-index:2;
     background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.75) 100%); /* FF3.6+ */
@@ -22,6 +24,7 @@
     border:none;
     float: left;
     margin: 20px;
+    background-color:black;
 }
 
 .mainbottomsection .stars {
@@ -30,7 +33,9 @@
 
 .tospot {
 width: calc(20% + 5px);
+width: -webkit-calc(20% + 5px);
 height: calc(30% - 15px);
+height: -webkit-calc(30% - 15px);
 position: absolute;
 left: 0px;
 }
@@ -38,6 +43,7 @@ left: 0px;
 .square {
     background:#ccc;
     width: calc(80% - 10px);
+    width: -webkit-calc(80% - 10px);
     height: 100%;
     position:absolute;
     left:0px;
@@ -57,10 +63,13 @@ left: 0px;
 
 .imgContainer {
     width: calc(80% - 10px);
+    width: -webkit-calc(80% - 10px);
     height: calc(100%);
+    height: -webkit-calc(100%);
     position:absolute;
     overflow:hidden;
     left: calc(20% + 10px);
+    left: -webkit-calc(20% + 10px);
     top:0;
 }
 .main {
@@ -132,17 +141,21 @@ background-color: rgba(0,0,0,0);
 
 #spot2 {
     top: calc(30% - 10px);
+    top: -webkit-calc(30% - 10px);
     background-color:#E67E22;
 }
 
 #spot3 {
     top: calc(60% - 20px);
+    top: -webkit-calc(60% - 20px);
     background-color:#F1C40E;
 }
 
 #goToCanvas {
 width: calc(20% + 5px);
+width: -webkit-calc(20% + 5px);
 height: calc(10% + 14px);
+height: -webkit-calc(10% + 14px);
 position: absolute;
 bottom: 0;
 background-color: #22A7F0;
@@ -220,6 +233,7 @@ font-size: 40px;
 .share {
     width:17%;
     height:calc(20% - 4.15px);
+    height:-webkit-calc(20% - 4.15px);
     margin-bottom:5px;
     position:relative;
     box-sizing:border-box;
@@ -241,6 +255,7 @@ font-size: 40px;
     height:50%;
     position:relative;
     margin-top:calc(12%);
+    margin-top:-webkit-calc(12%);
     z-index:2;
 }
 
@@ -253,6 +268,7 @@ font-size: 40px;
 
 .placeholder {
     width:calc(100%/3);
+    width:-webkit-calc(100%/3);
     position:absolute;
     height:100%;
     top:0px;
