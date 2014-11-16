@@ -34,10 +34,10 @@ function createMovie(num,title,rating,photo,id){
 function loadRealImg(){
     responses++;
     if(responses==3){
+        $("#loading2").hide();
         var sources = { first: imgs[0], second: imgs[1], third:imgs[2], firstplace:'images/first.png',secondplace:'images/second.png',thirdplace:'images/third.png'};
         var titles = [movies[0].title,movies[1].title,movies[2].title];
         createPNG(sources, titles);
-
     }
 }
 
@@ -112,9 +112,9 @@ function createPNG(sources, titles) {
     $(".share").click( function() {
         var expand = $(this).find('.expand');
         if( expand.css('z-index') == '-1') {
-            $(this).find('.expand').css({'transform':'scale(100)','z-index':'1'});
+            expand.css({'transform':'scale(100)','z-index':'1'});
         } else {
-            $(this).find('.expand').css({'transform':'scale(0)','z-index':'-1'});
+            expand.css({'transform':'scale(0)','z-index':'-1'});
         }
     });
 

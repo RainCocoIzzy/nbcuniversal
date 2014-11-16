@@ -445,9 +445,17 @@ function touchmove(ev){
                     if(slots[slotIndex]!=null){
                         shiftSlots(slotIndex);
                     }
+                    if(slotIndex == 2) {
+                        $("#shareexpand").css({'opacity':'1',"transform":'scale(100)'}).next('.hidden').css('opacity','1');
+                    }
+                    if(slotIndex != 2) {
+                    }
                     slots[slotIndex]=square;
                     square.lastIndex=slotIndex;
                 } else {
+                    if( $("#shareexpand").css("opacity","1") ) {
+                        $("#shareexpand").css({"opacity":"0","transform":'scale(0.1)'}).next('.hidden').css('opacity','0.2');
+                    }
                     square.toX = mainspotx;
                     square.toY = mainspoty;
                     square.lastIndex=-1;
@@ -467,7 +475,7 @@ function touchend(ev){
     for(var i =0;i<squares.length;i++){
         var square = squares[i];
         if(square.down){
-            square.css({'height':finalSquareH,'width':finalSquareW});
+            square.addClass("droppedSquare").css({'width':finalSquareW,'height':finalSquareH});
             square.width=finalSquareW;
             square.height=finalSquareH;
 
