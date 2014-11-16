@@ -221,6 +221,13 @@ function enterframe(){
             square.css('top',newY+'px');
         }
     }
+    if(slots[0]!=null && slots[1]!=null && slots[2]!=null){
+        $("#shareexpand").css({'opacity':'1',"transform":'scale(100)'}).next('.hidden').css('opacity','1');
+    } else {
+        if( $("#shareexpand").css("opacity","1") ) {
+            $("#shareexpand").css({"opacity":"0","transform":'scale(0.1)'}).next('.hidden').css('opacity','0.2');
+        }
+    }
 
     if(hold){
         swipeTime++;
@@ -321,7 +328,7 @@ $(document).ready(function(){
         }
     });
     $("#goToCanvas").on('click touchstart',function(){
-        location.href = "./index.php?m1="+slots[0].movie.id+"&m2="+slots[1].movie.id+"&m3="+slots[2].movie.id;
+        location.href = "./second.php?m1="+slots[0].movie.id+"&m2="+slots[1].movie.id+"&m3="+slots[2].movie.id;
     });
 
     if(prod){
@@ -445,17 +452,10 @@ function touchmove(ev){
                     if(slots[slotIndex]!=null){
                         shiftSlots(slotIndex);
                     }
-                    if(slotIndex == 2) {
-                        $("#shareexpand").css({'opacity':'1',"transform":'scale(100)'}).next('.hidden').css('opacity','1');
-                    }
-                    if(slotIndex != 2) {
-                    }
                     slots[slotIndex]=square;
                     square.lastIndex=slotIndex;
                 } else {
-                    if( $("#shareexpand").css("opacity","1") ) {
-                        $("#shareexpand").css({"opacity":"0","transform":'scale(0.1)'}).next('.hidden').css('opacity','0.2');
-                    }
+                    
                     square.toX = mainspotx;
                     square.toY = mainspoty;
                     square.lastIndex=-1;
