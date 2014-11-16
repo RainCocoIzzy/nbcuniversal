@@ -278,6 +278,7 @@ function createSquare(sx,sy){
     var square = $('#'+name);
     square.movie = movies[currMovie];
     movies.splice(currMovie,1);
+    numMovies = movies.length;
     square.down=true;
     square.diffX=sx-mainspotx;
     square.diffY=sy-mainspoty;
@@ -286,7 +287,8 @@ function createSquare(sx,sy){
     square.lastIndex=-1;
     square.width=finalImgW;
     square.height=finalImgH;
-    square.css('background-image',"url('"+square.movie.imageObj.src+"')");
+    square.css({'background-image':"url('"+square.movie.imageObj.src+"')",
+                'transform':'scale(0.8)'});
     square.css('left',(sx-square.diffX)+'px');
     square.css('top',(sy-square.diffY)+'px');
     squares.push(square);
@@ -345,7 +347,6 @@ $(document).ready(function(){
 
 function touch(ev){
     ev.preventDefault();
-    $(".spotimg").css("opacity","0");
     if(maindown){
         return;
     }
@@ -410,6 +411,7 @@ function touchmove(ev){
                 mainimg2.css('display','block');
             }
         }
+        else $(".spotimg").css("opacity","0");
     }
 
     for(var i =0;i<squares.length;i++){
