@@ -30,7 +30,7 @@
      }
      header('Content-type: text/xml');
      $id = $_GET['id'];
-     $parameters = sprintf('op=videolookup&movieid='.$id.'&sourceid=2179049123&providerid=3');
+     $parameters = sprintf('op=videolookup&movieid='.$id);
      $xml=getResponseFromParameters($parameters);
      echo $xml;
 ?>

@@ -307,7 +307,6 @@ $(document).ready(function(){
     finalImgH = $("#mainimg").height();
 
     mainspotx = $("#mainimg").offset().left;
-    console.log(mainspotx);
 
     $("#iinfo").on('click touchstart', function() {
         if( $(synopsisDiv).css("opacity") == "1") {
@@ -530,9 +529,16 @@ function loadVideo(movieId){
             var response =xmlhttp.responseText;
             var parse = $.parseXML(response);
             var $xml = $(parse);
-            var vidurl = $xml.find('videohref').text();
-            console.log(vidurl);
-            $("#playbtn").attr('src',vidurl);
+            var vidurl = $xml.find('videos');
+            for(var i = 0;i<$(vidurl).children().length;i++){
+                var vid = $(vidurl).children().eq(i).get(0);
+                var attr = $(vid).attr('type');
+                if(attr=="Trailer"){
+                    var vidhttp = $(vid).children().eq(1).get(0).innerHTML;
+                    console.log(vidhttp);
+                    $("#playbtn").attr('src',vidhttp);
+                }
+            }
         }
     }
     xmlhttp.open("GET","testvid.php?id="+movieId,true);

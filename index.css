@@ -37,7 +37,7 @@ width: -webkit-calc(20% + 5px);
 height: calc(30% - 15px);
 height: -webkit-calc(30% - 15px);
 position: absolute;
-left: 0;
+left: 0px;
 }
 
 .square {
