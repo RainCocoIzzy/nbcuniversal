@@ -31,18 +31,15 @@
     background-color:white;
     overflow:hidden;
 }
-
-#tospot4 {
-    top:-100px;
-}
-
 .tospot {
 width: calc(20% + 5px);
-width: -webkit-calc(20% + 5px);
 height: calc(30% - 15px);
-height: -webkit-calc(30% - 15px);
 position: absolute;
 left: 0px;
+}
+#spot4 {
+    width:0px;
+    height:0px;
 }
 
 #loading {
