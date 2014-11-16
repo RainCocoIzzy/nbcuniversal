@@ -1,4 +1,3 @@
-canvas;
 
 function statusChangeCallback(response) {
     console.log('statusChangeCallback');
@@ -27,31 +26,36 @@ function checkLoginState() {
 
 
 function fb_login() {
-    FB.login(function(response) {
-       console.log(response);
-     }, {scope: 'user_friends'});
+  FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+  });
 }
 
 function fb_publish() {
     FB.ui({
       method: 'feed',
-      link: 'https://www.facebook.com/dialog/feed?app_id=145634995501895&display=popup&caption=An%20example%20caption&link=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2F&redirect_uri=http://dalyagershtein.com/nbcuniversal/images/img1.jpg',
+      link: 'https://www.facebook.com/dialog/feed?app_id=717277388349929&display=popup&caption=An%20example%20caption&width=50&link=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2F&redirect_uri=http://dalyagershtein.com/nbcuniversal/images/img1.jpg',
       caption: '#Top3IWantToSee',
     }, function(response){});
 }
 
 
 $(document).ready( function() {
-    
     var sources = { first: "images/img1.jpg", second: "images/img2.jpg", third:"images/img3.jpg"};
     var titles = ["BIG HERO 6","Mockingjay","Horrible Bosses"];
     createPNG(sources, titles);
 
-    //fb_login();
-  FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
-  });
+    $("#facebooklink").click( function() { fb_login() });
     
+    $("#twitterlink").click( function() {
+        $.ajax({
+              type: "POST",
+              url: "https://api.twitter.com/1.1/direct_messages/new.json?",
+              data: "text=hello%2C%20tworld.%20welcome%20to%201.1.&screen_name=theseancook",
+              success: function() {alert('success')},
+              dataType: ""
+        });
+    });
 });
 
 
