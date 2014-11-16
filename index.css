@@ -28,7 +28,7 @@
     bottom:10px;
     right:10px;
     border:2px solid #aaa;
-    background-color:black;
+    background-color:white;
 }
 
 .tospot {
@@ -539,12 +539,24 @@ margin-right: 10px;
     height:10%;
 }
 
+#headerbtn {
+    background:#EC3C00;
+    border-radius:10px;
+    color:white;
+    width:20%;
+    padding:10px;
+    position:absolute;
+    right:20px;
+    top:20px;
+    font-weight:300;
+    text-align:center;
+}
+
 #headerbar {
     position:absolute;
     width:100%;
-    background:rgba(0,0,0,.3);
+    background:white;
     height:calc(10%-15px);
-    color:white;
     text-align:center;
     z-index:10;
     padding-top:15px;
