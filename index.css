@@ -20,7 +20,7 @@
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#bf000000',GradientType=0 ); /* IE6-9 */
 }
 
-#playbtn {
+.playbtn{
     height: 70px;
     width:120px;
     border:none;
@@ -29,7 +29,16 @@
     right:10px;
     border:2px solid #aaa;
     background-color:white;
-    overflow:hidden;
+}
+
+#playbtn {
+    height: 130px;
+    width:250px;
+    border:none;
+    position:absolute;
+    z-index:101;
+    bottom:10px;
+    right:10px;
 }
 
 .tospot {
@@ -38,6 +47,7 @@ height: calc(30% - 15px);
 position: absolute;
 left: 0px;
 }
+
 #spot4 {
     width:0px;
     height:0px;
