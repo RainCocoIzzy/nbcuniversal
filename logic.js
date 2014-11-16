@@ -71,6 +71,7 @@ function Movie(){
 }
 
 function setMovie(div,movieNum){
+    console.log("set "+movieNum);
     var currMovieObj = movies[movieNum];
     if(currMovieObj.loadedImage){
         if(div==mainimg){
@@ -79,6 +80,7 @@ function setMovie(div,movieNum){
         }
         div.css('background-image',"url('"+currMovieObj.imageObj.src+"')");
         mainTitleDiv.html( currMovieObj.title );
+        mainGenreDiv.html( currMovieObj.genre );
         synopsisDiv.html( currMovieObj.synopsis );
         updateRating( starRatingsDiv, currMovieObj.rating);
     }
@@ -87,7 +89,7 @@ function setMovie(div,movieNum){
 function updateRating(div,rating) {
     rating = parseInt(rating);
     div.empty();
-    for(var i = 1; i < rating; i++) {
+    for(var i = 1; i < Math.max(5,Math.round(rating+.5)); i++) {
         var img = document.createElement("img");
         img.src = 'images/star.png';
         div.append(img);
@@ -188,8 +190,8 @@ function enterframe(){
     if(!startedAll){
         return;
     } else {
-        $("#loading").hide();
         if(!firstMovie){
+            $("#loading").hide();
             setMovie(mainimg,currMovie);
             firstMovie=true;
             $("body").css('display','block');
@@ -299,6 +301,7 @@ function createSquare(sx,sy){
 
 $(document).ready(function(){
     mainTitleDiv = $("#mainTitle");
+    mainGenreDiv = $("#mainGenre");
     synopsisDiv = $("#synopsis");
     starRatingsDiv = $("#mainRating");
     finalSquareH = $("#spot1").height();
@@ -442,9 +445,17 @@ function touchmove(ev){
                     if(slots[slotIndex]!=null){
                         shiftSlots(slotIndex);
                     }
+                    if(slotIndex == 2) {
+                        $("#shareexpand").css({'opacity':'1',"transform":'scale(100)'}).next('.hidden').css('opacity','1');
+                    }
+                    if(slotIndex != 2) {
+                    }
                     slots[slotIndex]=square;
                     square.lastIndex=slotIndex;
                 } else {
+                    if( $("#shareexpand").css("opacity","1") ) {
+                        $("#shareexpand").css({"opacity":"0","transform":'scale(0.1)'}).next('.hidden').css('opacity','0.2');
+                    }
                     square.toX = mainspotx;
                     square.toY = mainspoty;
                     square.lastIndex=-1;

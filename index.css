@@ -20,10 +20,11 @@
 
 #playbtn {
     height: 70px;
-    width:70px;
+    width:120px;
     border:none;
     float: left;
-    margin: 20px;
+    margin: 10px;
+    border:2px solid #aaa;
     background-color:black;
 }
 
@@ -142,7 +143,6 @@ left: 0px;
     position: absolute;
     top: 0;
     left:0;
-    background: black;
     /*background-size:auto;*/
     overflow: hidden;
         background-size: cover;
@@ -170,7 +170,7 @@ left: 0px;
     right: 15px;
     z-index: 2;
     color: white;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0,0,0,0.7);
     border-radius: 50%;
 }
 #iinfo {
@@ -194,6 +194,7 @@ background-color: rgba(0,0,0,0);
     color: white;
     position: relative;
     margin:40px;
+    font-size:16px;
     opacity:0;
     -webkit-transition: opacity 1s;
         -moz-transition: opacity 1s;
@@ -223,18 +224,21 @@ height: calc(10% + 14px);
 height: -webkit-calc(10% + 14px);
 position: absolute;
 bottom: 0;
-background-color: #22A7F0;
+background-color: rgba(34, 167, 240, 0.48);
 color: white;
 text-align: center;
 padding-top: 2.5%;
 font-size: 24px;
 left: 0;
+overflow:hidden;
 }
 
 body {
     padding:0;
     margin:0;
-    font-family:futura;
+    //font-family:futura;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+       font-weight: 300;
 }
 
 .container {
@@ -316,6 +320,17 @@ font-size: 40px;
     border-radius: 50%;
 }
 
+#shareexpand {
+background-color: #22A7F0;
+    padding: 5px;
+    transition:transform 1s;
+    border-radius: 50%;
+ position: absolute;
+margin-left: 50%;
+margin-top: 10px;
+opacity:0;
+}
+
 .icon {
     height:50%;
     position:relative;
@@ -343,6 +358,12 @@ font-size: 40px;
     opacity:0;
 }
 
+.hidden {
+    opacity:0.2;
+    z-index: 2;
+    position: relative;
+}
+
 .bottomsection {
     position:absolute;
     bottom:0;
@@ -359,8 +380,9 @@ font-size: 40px;
 }
 
 .stars img {
-    height:30px;
-    padding:5px;
+    height:22px;
+    width:22px;
+    padding:2px;
 }
 
 .stars {
@@ -369,9 +391,17 @@ font-size: 40px;
 
 .title {
     color:white;
-    padding: 20px;
+    padding: 10px;
     padding-bottom: 0;
     font-size: 20px;
+}
+
+.genre {
+    color:#dedede;
+    padding: 10px;
+    padding-bottom: 0;
+    padding-top: 0;
+    font-size: 18px;
 }
 
 .buynow img {
@@ -393,7 +423,7 @@ margin-right: 10px;
     right: 10px;
     bottom: 10px;
     padding: 10px;
-    font-family:proxima-nova, Helvetica, Arial, sans-serif;
+    font-family: Helvetica Neue, Arial, sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 600;
