@@ -188,6 +188,7 @@ function enterframe(){
     if(!startedAll){
         return;
     } else {
+        $("#loading").hide();
         if(!firstMovie){
             setMovie(mainimg,currMovie);
             firstMovie=true;
@@ -290,8 +291,7 @@ function createSquare(sx,sy){
     square.lastIndex=-1;
     square.width=finalImgW;
     square.height=finalImgH;
-    square.css({'background-image':"url('"+square.movie.imageObj.src+"')",
-                'transform':'scale(0.8)'});
+    square.css({'background-image':"url('"+square.movie.imageObj.src+"')"});
     square.css('left',(sx-square.diffX)+'px');
     square.css('top',(sy-square.diffY)+'px');
     squares.push(square);
