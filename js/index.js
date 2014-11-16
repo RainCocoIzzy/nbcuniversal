@@ -1,9 +1,57 @@
-$(document).ready( function() {
+canvas;
 
+function statusChangeCallback(response) {
+    console.log('statusChangeCallback');
+    console.log(response);
+    if (response.status === 'connected') {
+      // Logged into your app and Facebook.
+      fb_publish();
+    } else if (response.status === 'not_authorized') {
+      // The person is logged into Facebook, but not your app.
+      document.getElementById('status').innerHTML = 'Please log ' +
+        'into this app.';
+    } else {
+      // The person is not logged into Facebook, so we're not sure if
+      // they are logged into this app or not.
+      document.getElementById('status').innerHTML = 'Please log ' +
+        'into Facebook.';
+    }
+}
+
+function checkLoginState() {
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+}
+
+
+
+function fb_login() {
+    FB.login(function(response) {
+       console.log(response);
+     }, {scope: 'user_friends'});
+}
+
+function fb_publish() {
+    FB.ui({
+      method: 'feed',
+      link: 'https://www.facebook.com/dialog/feed?app_id=145634995501895&display=popup&caption=An%20example%20caption&link=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2F&redirect_uri=http://dalyagershtein.com/nbcuniversal/images/img1.jpg',
+      caption: '#Top3IWantToSee',
+    }, function(response){});
+}
+
+
+$(document).ready( function() {
+    
     var sources = { first: "images/img1.jpg", second: "images/img2.jpg", third:"images/img3.jpg"};
     var titles = ["BIG HERO 6","Mockingjay","Horrible Bosses"];
     createPNG(sources, titles);
 
+    //fb_login();
+  FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+  });
+    
 });
 
 
@@ -29,7 +77,16 @@ function loadImages(sources, callback) {
 
 function createPNG(sources, titles) {
 
-    var canvas = document.getElementById("canvas");
+    $(".share").click( function() {
+        var expand = $(this).find('.expand');
+        if( expand.css('z-index') == '-1') {
+            $(this).find('.expand').css({'transform':'scale(100)','z-index':'1'});
+        } else {
+            $(this).find('.expand').css({'transform':'scale(0)','z-index':'-1'});
+        }
+    });
+
+    canvas = document.getElementById("canvas");
     var ctx = canvas.getContext("2d");
     
     ctx.font="20px Futura";
@@ -81,3 +138,36 @@ function createPNG(sources, titles) {
     });
 }
 
+function createLanding() {
+
+    $(".buynow").click( function() {
+    });
+
+    var firstMovie = { img:'images/img1.jpg',title:'Big Hero 6',url:'http://',rating:'5'};
+    var secondMovie = { img:'images/img2.jpg',title:'Mockingjay',url:'http://',rating:'5'};
+    var thirdMovie = { img:'images/img3.jpg',title:'Horrible Bosses',url:'http://',rating:'5'};
+
+    var movies = [firstMovie,secondMovie,thirdMovie];
+    
+    var first = $("#first");
+    var second = $("#second");
+    var third = $("#third");
+
+    var divs = [first,second,third];
+
+    for(var i = 0; i < 3; i++) {
+        $(divs[i]).css('background-image','url('+movies[i].img+')')
+                .find('.title').html(movies[i].title);
+        generateStars( $(divs[i]).find('.stars'), movies[i].rating );
+    }
+}
+
+function generateStars(div,rating) {
+    rating = parseInt(rating);
+    for(var i = 1; i < rating; i++) {
+        var img = document.createElement("img");
+        img.src = 'images/star.png';
+
+        div.append(img);
+    }
+}
