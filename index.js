@@ -63,7 +63,7 @@ function fb_login() {
 function fb_publish() {
     FB.ui({
         method: 'feed',
-        link: 'http://danny-yaroslavski.com/dragdrop/landingpage.php?m1='+movies[0].id+'&m2='+movies[1].id+"&m3="+movies[2].id,
+        link: 'http://cuckoohash.com/landingpage.php?m1='+movies[0].id+'&m2='+movies[1].id+"&m3="+movies[2].id,
         picture: imgURL,
         caption: '#Top3IWantToSee',
     }, function(response){});
