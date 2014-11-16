@@ -491,7 +491,8 @@ function touchend(ev){
                 animDir="up";
                 setMovie(mainimg2,getNextMovieIndex());
                 mainimg2.css('top',500);
-                mainimg2.css('display','blocabsolute}
+                mainimg2.css('display','block');
+            }
         }
         if(square.lastIndex==-1 || square.lastIndex==3){
             if(square.lastIndex==3){
