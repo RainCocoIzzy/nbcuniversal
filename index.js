@@ -1,40 +1,31 @@
-function statusChangeCallback(response) {
-    console.log('statusChangeCallback');
-    console.log(response);
-    if (response.status === 'connected') {
-      // Logged into your app and Facebook.
-      fb_publish();
-    } else if (response.status === 'not_authorized') {
-      // The person is logged into Facebook, but not your app.
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into this app.';
-    } else {
-      // The person is not logged into Facebook, so we're not sure if
-      // they are logged into this app or not.
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into Facebook.';
-    }
-}
-
-function checkLoginState() {
-    FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
-    });
-}
-
-
+var imgURL;
 
 function fb_login() {
-  FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
-  });
+   FB.getLoginStatus(function(response) {
+     if (response.status === 'connected') {
+         fb_publish();
+     } else {
+        FB.login(function(response) {
+            if (response.authResponse) {
+                console.log('Welcome!  Fetching your information.... ');
+                FB.api('/me', function(response) {
+                    console.log('Good to see you, ' + response.name + '.');
+                },{scope :'publish_actions'});
+            } else {
+                console.log('User cancelled login or did not fully authorize.');
+            }
+        });
+     }
+   });
 }
 
 function fb_publish() {
+        //method: 'feed',
+        //href: 'https://www.facebook.com/dialog/feed?app_id=717277388349929&display=popup&caption=An%20example%20caption&width=50&link=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2F&redirect_uri='+imgURL,
     FB.ui({
-      method: 'feed',
-      link: 'https://www.facebook.com/dialog/feed?app_id=717277388349929&display=popup&caption=An%20example%20caption&width=50&link=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2F&redirect_uri=http://dalyagershtein.com/nbcuniversal/images/img1.jpg',
-      caption: '#Top3IWantToSee',
+        method: 'feed',
+        link: imgURL,
+        caption: '#Top3IWantToSee',
     }, function(response){});
 }
 
@@ -48,11 +39,11 @@ $(document).ready( function() {
     });
     $("#twitterlink").click( function() {
         $.ajax({
-              type: "POST",
-              url: "https://api.twitter.com/1.1/direct_messages/new.json?",
-              data: "text=hello%2C%20tworld.%20welcome%20to%201.1.&screen_name=theseancook",
-              success: function() {alert('success')},
-              dataType: ""
+            type: "POST",
+            url: "https://api.twitter.com/1.1/direct_messages/new.json?",
+            data: "text=hello%2C%20tworld.%20welcome%20to%201.1.&screen_name=theseancook",
+            success: function() {alert('success')},
+            dataType: ""
         });
     });
 });
@@ -64,9 +55,9 @@ function loadImages(sources, callback) {
     var numImages = 0;
     // get num of sources
     for (var src in sources) {
-      numImages++;
+        numImages++;
     }
-    
+
     for (var src in sources) {
         images[src] = new Image();
         images[src].onload = function(){
@@ -93,7 +84,7 @@ function createPNG(sources, titles) {
 
     canvas = document.getElementById("canvas");
     var ctx = canvas.getContext("2d");
-    
+
     ctx.font="20px Futura";
     ctx.fillStyle="white";
 
@@ -106,9 +97,9 @@ function createPNG(sources, titles) {
     loadImages(sources, function(images) {
 
         //First
-        ctx.drawImage(images.first, 0, 0, cw, images.first.height, pad, pad, cw*(3/5)-pad, ch-pad2);
+        ctx.drawImage(images.first, 0, 0, images.first.width, images.first.height, pad, pad, cw*(3/5)-pad, ch-pad2);
         ctx.fillText(titles[0],cw/6,ch-pad*5);
-        
+
         ctx.fillStyle="#E74C3C";
         ctx.moveTo(cw*(3/5),ch-pad);
         ctx.lineTo(cw*(3/5),ch-pad*13);
@@ -119,19 +110,19 @@ function createPNG(sources, titles) {
         ctx.drawImage(images.second, 0, 0, images.second.width, images.second.height, cw*(3/5)+pad, pad, cw*(3/5)-120, ch*(3/5)-pad);
         ctx.fillStyle="white";
         ctx.fillText(titles[1],cw*(4/6),ch*(3/5)-pad*5);
-        
+
         ctx.fillStyle="#E67E22";
         ctx.beginPath();
         ctx.moveTo(cw-pad,ch*(3/5));
         ctx.lineTo(cw-pad,ch*(3/5)-12*pad);
         ctx.lineTo(cw-13*pad,ch*(3/5));
         ctx.fill();
-        
+
         //Third
         ctx.drawImage(images.third, 0, 0, images.third.width, images.third.height, cw*(3/5)+pad, ch*(3/5)+pad, cw*(3/5)-120, ch*(2/5)-pad2);
         ctx.fillStyle="white";
         ctx.fillText(titles[2],cw*(4/6),ch-pad*5);
-        
+
         ctx.fillStyle="#F1C40F";
         ctx.beginPath();
         ctx.moveTo(cw-pad,ch-pad);
@@ -142,17 +133,16 @@ function createPNG(sources, titles) {
         var finalImg = canvas.toDataURL("image/png");
         var ajax = new XMLHttpRequest();
         randomNum = Math.round(Math.random()*10000000);
-        console.log(finalImg);
         ajax.open("POST",'saveimg.php?loc='+randomNum,false);
         ajax.setRequestHeader('Content-Type', 'application/upload');
         ajax.onreadystatechange=function(){
             if (ajax.readyState==4 && ajax.status==200){
-                console.log(randomNum);
                 var myString = location.href;
                 var split = myString.split("/");
                 split.pop();
                 var loc = split.join("/");
-                console.log(loc+"/created/image"+randomNum+".png");
+                imgURL = loc+"/created/image"+randomNum+".png";
+                console.log(imgURL);
             }
         }
         ajax.send(finalImg);
@@ -170,7 +160,7 @@ function createLanding() {
     var thirdMovie = { img:'images/img3.jpg',title:'Horrible Bosses',url:'http://',rating:'5'};
 
     var movies = [firstMovie,secondMovie,thirdMovie];
-    
+
     var first = $("#first");
     var second = $("#second");
     var third = $("#third");
@@ -180,16 +170,16 @@ function createLanding() {
     for(var i = 0; i < 3; i++) {
         $(divs[i]).css('background-image','url('+movies[i].img+')')
                 .find('.title').html(movies[i].title);
-        generateStars( $(divs[i]).find('.stars'), movies[i].rating );
-    }
-}
+                generateStars( $(divs[i]).find('.stars'), movies[i].rating );
+                }
+                }
 
-function generateStars(div,rating) {
-    rating = parseInt(rating);
-    for(var i = 1; i < rating; i++) {
-        var img = document.createElement("img");
-        img.src = 'images/star.png';
+                function generateStars(div,rating) {
+                    rating = parseInt(rating);
+                    for(var i = 1; i < rating; i++) {
+                        var img = document.createElement("img");
+                        img.src = 'images/star.png';
 
-        div.append(img);
-    }
-}
+                        div.append(img);
+                    }
+                }
