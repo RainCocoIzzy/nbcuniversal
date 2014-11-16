@@ -1,4 +1,13 @@
 <html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+    </head>
 <script src='js/jquery.min.js'></script>
 <script src='js/logic.js'></script>
 <script>
@@ -45,13 +54,21 @@ xmlhttp.onreadystatechange=function() {
 xmlhttp.open("GET","test.php",true);
 xmlhttp.send();
 </script>
-    <link rel="stylesheet" type="text/css" href="css/lstyle.css">
-    <body style="width:100%; height:100%; margin:0">
-        <div id="spot1" class="tospot" style="top:100px"></div>
-        <div id="spot2" class="tospot" style="top:250px"></div>
-        <div id="spot3" class="tospot" style="top:400px"></div>
+<body style="width:100%; height:100%; margin:0">
+    <div class="container">
+        <div id="spot1" class="tospot"></div>
+        <div id="spot2" class="tospot"></div>
+        <div id="spot3" class="tospot"></div>
         <div id="spot4" class="tospot" style="top:550px;left:200px"></div>
-        <div id="mainimg" class="main"></div>
+        <div id="mainimg" class="main">
+            <div class="mainbottomsection">
+                <img id="playbtn" src="images/playbtn.png"/>
+                <div id="mainTitle" class="title"></div>
+                <div id="mainRating" class="stars"></div>
+                <div id="synopsys"></div>
+            </div>
+        </div>
         <div id="mainimg2" class="main" style="background:red"></div>
+        </div>
     </body>
 </html>

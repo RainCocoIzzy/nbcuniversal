@@ -66,14 +66,26 @@ function Movie(){
     }
 }
 
+//caching divs
+
 function setMovie(div,movieNum){
     console.log(div + " "+movieNum);
     var currMovieObj = movies[movieNum];
     if(currMovieObj.loadedImage){
         div.css('background-image',"url('"+currMovieObj.imageObj.src+"')");
-        // TODO : div.changehtml
-        //currMovieObj.imageObj
-        //currMovieObj.genre // etc
+        mainTitleDiv.html( currMovieObj.title );
+        synopsysDiv.html( currMovieObj.synopsys );
+        updateRating( starRatingsDiv, currMovieObj.rating);
+    }
+}
+
+function updateRating(div,rating) {
+    rating = parseInt(rating);
+    div.empty();
+    for(var i = 1; i < rating; i++) {
+        var img = document.createElement("img");
+        img.src = 'images/star.png';
+        div.append(img);
     }
 }
 
@@ -270,6 +282,10 @@ function createSquare(sx,sy){
 }
 
 $(document).ready(function(){
+    mainTitleDiv = $("#mainTitle");
+    synopsysDiv = $("#synopsys");
+    starRatingsDiv = $("#mainRating");
+    
     if(prod){
         $(document).on({ 'touchstart' : touch});
         $(document).on({ 'touchmove' : touchmove});
