@@ -344,6 +344,7 @@ $(document).ready(function(){
     window.setInterval(enterframe,10);
     
     //$("body").css('display','none');
+    loadVideo(175146);
 });
 
 
@@ -519,4 +520,20 @@ function createMovie(title,genre,synopsis,rating,photo,id){
     //console.log(post);
     movies.push(movie);
     numMovies = movies.length;
+}
+
+function loadVideo(movieId){
+    var xmlhttp=new XMLHttpRequest();
+    xmlDoc=xmlhttp.responseXML;
+    xmlhttp.onreadystatechange=function() {
+    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+            var response =xmlhttp.responseText;
+            var parse = $.parseXML(response);
+            var $xml = $(parse);
+            var vidurl = $xml.find('videohref').text();
+            $("#playbtn").attr('src',vidurl);
+        }
+    }
+    xmlhttp.open("GET","testvid.php?id="+movieId,true);
+    xmlhttp.send();
 }
