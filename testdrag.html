@@ -11,38 +11,39 @@
 <script src='jquery.min.js'></script>
 <script src='logic.js'></script>
 <script>
-var xmlhttp=new XMLHttpRequest();
-xmlDoc=xmlhttp.responseXML;
-xmlhttp.onreadystatechange=function() {
+    var xmlhttp=new XMLHttpRequest();
+    xmlDoc=xmlhttp.responseXML;
+    xmlhttp.onreadystatechange=function() {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
         var response =xmlhttp.responseText;
         var parse = $.parseXML(response);
         var $xml = $(parse);
-        var movies = $xml.find('moviesbypostalcodesearchresponse').find('data').find('movies')[0].children;
+        var movies = $xml.find('moviesbypostalcodesearchresponse').find('data').find('movies').get(0);
         var k =0;
-        for(var i =0;i<movies.length;i++){
-            var data = movies[i].children;
+        var num = $(movies).attr('itemcount');
+        for(var i =0;i<num;i++){
+            var data = $(movies).children().eq(i).get(0);
             var photos = data['photos'];
 
-            //console.log( $(data).children().namedItem('title'));
             var title="";
             var genre="";
             var synopsis="";
             var rating="";
             var photo="";
-            for(var j =0;j<$(data).length;j++){
-                var n = $(data[j]).get(0).nodeName;
+            for(var j =0;j<$(data).children().length;j++){
+                var d2 = $(data).children().eq(j).get(0);
+                var n = d2.nodeName;
                 if(n=='title'){
-                    title = $(data[j]).text();
+                    title = $(d2).text();
                 } else if(n=='genre'){
-                    genre = $(data[j]).text();
+                    genre = $(d2).text();
                 } else if(n=='synopsis' && synopsis==""){
-                    synopsis = $(data[j]).text();
+                    synopsis = $(d2).text();
                 } else if(n=='fanrating'){
-                    rating = $(data[j].children[0]).text();
+                    rating = $(d2).children().eq(0).text();
                 } else if(n=='photos'){
-                    var photos = data[j];
-                    photo = $(photos.children[0]).attr('imagehref');
+                    var photos = d2;
+                    photo = $(photos).children().eq(0).attr('imagehref');
                 }
             }
             if(title!="" && genre!="" && synopsis!="" && rating!="" && photo!=""){
