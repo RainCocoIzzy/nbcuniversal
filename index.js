@@ -1,4 +1,3 @@
-
 function statusChangeCallback(response) {
     console.log('statusChangeCallback');
     console.log(response);
@@ -39,13 +38,14 @@ function fb_publish() {
     }, function(response){});
 }
 
-
 $(document).ready( function() {
     var sources = { first: "images/img1.jpg", second: "images/img2.jpg", third:"images/img3.jpg"};
     var titles = ["BIG HERO 6","Mockingjay","Horrible Bosses"];
     createPNG(sources, titles);
 
-    $("#facebooklink").click( function() { fb_login() });
+    $("#facebooklink").click( function() { 
+        fb_login();
+    });
     $("#twitterlink").click( function() {
         $.ajax({
               type: "POST",
@@ -77,6 +77,8 @@ function loadImages(sources, callback) {
         images[src].src = sources[src];
     }
 }
+
+var randomNum;
 
 function createPNG(sources, titles) {
 
@@ -137,7 +139,24 @@ function createPNG(sources, titles) {
         ctx.lineTo(cw-pad*12,ch-pad);
         ctx.fill();
 
-        //var finalImg = canvas.toDataURL("image/png");
+        var finalImg = canvas.toDataURL("image/png");
+        var ajax = new XMLHttpRequest();
+        randomNum = Math.round(Math.random()*10000000);
+        console.log(finalImg);
+        ajax.open("POST",'saveimg.php?loc='+randomNum,false);
+        ajax.setRequestHeader('Content-Type', 'application/upload');
+        ajax.onreadystatechange=function(){
+            if (ajax.readyState==4 && ajax.status==200){
+                console.log(randomNum);
+                var myString = location.href;
+                var split = myString.split("/");
+                split.pop();
+                var loc = split.join("/");
+                console.log(loc+"/created/image"+randomNum+".png");
+            }
+        }
+        ajax.send(finalImg);
+
     });
 }
 
