@@ -337,9 +337,9 @@ font-size: 40px;
     position:absolute;
     height:90%;
     top:10%;
-    background-size: auto 100%;
-    background-position: center;
-    background-repeat: no-repeat;
+    overflow: hidden;
+        background-size: cover;
+            background-position: center center;
     opacity:0;
 }
 
