@@ -18,6 +18,8 @@
 
 #playbtn {
     height: 70px;
+    width:70px;
+    border:none;
     float: left;
     margin: 20px;
 }
@@ -385,3 +387,11 @@ margin-right: 10px;
     border-radius: 0px !important;
 }
 
+#vidholder {
+    display:none;
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:10%;
+    height:10%;
+}
