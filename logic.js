@@ -284,7 +284,11 @@ $(document).ready(function(){
     mainTitleDiv = $("#mainTitle");
     synopsysDiv = $("#synopsys");
     starRatingsDiv = $("#mainRating");
-    
+   
+    $("#info").on('click touchstart', function() {
+        $(this).css({"border":"0","transform":"scale(100)"});
+    });
+
     if(prod){
         $(document).on({ 'touchstart' : touch});
         $(document).on({ 'touchmove' : touchmove});
