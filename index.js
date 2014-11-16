@@ -120,13 +120,16 @@ function createPNG(sources, titles) {
 
     loadImages(sources, function(images) {
         ctx.drawImage(images.first, 0, 0, images.first.width, images.first.height, pad, pad, cw*(3/5)-pad, ch-pad2);
-        ctx.fillText(titles[0],cw/6,ch-pad*5);
-
+        
         ctx.fillStyle="#E74C3C";
         ctx.moveTo(cw*(3/5),ch-pad);
         ctx.lineTo(cw*(3/5),ch-pad*13);
         ctx.lineTo(cw*(3/5)-pad*12,ch-pad);
         ctx.fill();
+        
+        ctx.fillStyle="white";
+        ctx.fillText(titles[0],cw/6,ch-pad*5);
+        ctx.fillText("1",cw*(3/5),ch-pad);
 
         //Second
         ctx.drawImage(images.second, 0, 0, images.second.width, images.second.height, cw*(3/5)+pad, pad, cw*(3/5)-120, ch*(3/5)-pad);
