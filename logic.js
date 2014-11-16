@@ -321,7 +321,7 @@ $(document).ready(function(){
         }
     });
     $("#goToCanvas").on('click touchstart',function(){
-        window.location = "./index.php?m1="+slots[0].movie.id+"&m2="+slots[1].movie.id+"&m3="+slots[2].movie.id;
+        location.href = "./index.php?m1="+slots[0].movie.id+"&m2="+slots[1].movie.id+"&m3="+slots[2].movie.id;
     });
 
     if(prod){
@@ -511,7 +511,7 @@ function createMovie(title,genre,synopsis,rating,photo,id){
     var movie = new Movie();
     movie.title=title;
     movie.genre=genre;
-    movie.synopsis=synopsis;
+    movie.synopsis="Synopsis: \n"+synopsis;
     movie.rating = rating;
     movie.photoStr = photo;
     movie.id=id;

@@ -2,6 +2,8 @@
     text-align:left;
     position:absolute;
     bottom:0;
+    padding:0;
+    padding-top:100px;
     width:100%;
     width: calc(80% - 10px);
     width: -webkit-calc(80% - 10px);
@@ -22,14 +24,11 @@
     height: 70px;
     width:120px;
     border:none;
-    float: left;
-    margin: 10px;
+    position:absolute;
+    bottom:10px;
+    right:10px;
     border:2px solid #aaa;
     background-color:black;
-}
-
-.mainbottomsection .stars {
-    padding:0;
 }
 
 .tospot {
@@ -179,6 +178,7 @@ color: white;
 border: 2px solid white;
 padding: 9px 17px;
 background-color: rgba(0,0,0,0);
+font-size:16px;
 }
 
 #info {
@@ -193,7 +193,7 @@ background-color: rgba(0,0,0,0);
     z-index: 3;
     color: white;
     position: relative;
-    margin:40px;
+    margin:60px;
     font-size:16px;
     opacity:0;
     -webkit-transition: opacity 1s;
@@ -243,17 +243,19 @@ body {
 .container {
     width:667px;
     height:375px;
-    background:black;
+    background:white;
     position:relative;
     padding:5px;
     box-sizing:border-box;
 }
 
 canvas {
-    background-color:white;
-    position:absolute;
-    bottom:5px;
-    right: 5px;
+    background-color: white;
+    position: absolute;
+    bottom: 15px;
+    right: 3px;
+    box-shadow: 0px 10px 30px #747474;
+    padding: 2px;
 }
 
 #top3 {
@@ -264,34 +266,35 @@ top: 10px;
 right: 0;
 color: white;
 font-size: 40px;
+    padding: 2px;
 }
 
 #facebooklink {
-    background-color:rgba(241, 196, 15, 0.5);;
+    background-color: #FFEC70;
 }
 #facebooklink .expand {
-    background-color: #FFEC70;
+    background-color:rgba(255, 255,255, 0.8);;
 }
 
 #twitterlink {
-    background-color:rgba(243, 156, 18, 0.5);
+    background-color:rgba(243, 156, 18, 1);
 }
 #twitterlink .expand {
-    background-color:rgba(243, 156, 18,1);
+    background-color:rgba(255, 255,255, 0.8);;
 }
 
 #googlelink {
-    background-color:rgba(230, 126, 34, 0.5)
+    background-color:rgba(230, 126, 34, 1);
 }
 #googlelink .expand {
-    background-color:rgba(230, 126, 34, 1);
+    background-color:rgba(255, 255,255, 0.8);;
 }
 
 #instagramlink {
-    background-color:rgba(231, 76, 60, 0.5);
+    background-color:rgb(231, 76, 60);
 }
 #instagramlink .expand {
-    background-color:rgb(231, 76, 60);
+    background-color:rgba(255, 255,255, 0.8);;
 }
 
 #postlink {
@@ -303,6 +306,7 @@ font-size: 40px;
     height:calc(20% - 4.15px);
     height:-webkit-calc(20% - 4.15px);
     margin-bottom:5px;
+    padding-top:5px;
     position:relative;
     box-sizing:border-box;
     text-align:center;
@@ -347,6 +351,7 @@ font-size: 40px;
 }
 
 .bottomsection {
+    padding-top: 150px;
     position:absolute;
     bottom:0;
     width:100%;
@@ -361,6 +366,10 @@ font-size: 40px;
 
 }
 
+.img {
+    padding:2px;
+}
+
 .stars img {
     height:22px;
     width:22px;
@@ -368,7 +377,7 @@ font-size: 40px;
 }
 
 .stars {
-    padding:10px;
+    padding-bottom:10px;
 }
 
 .title {
@@ -376,6 +385,8 @@ font-size: 40px;
     padding: 10px;
     padding-bottom: 0;
     font-size: 20px;
+    overflow:hidden;
+    width:300px;
 }
 
 .genre {
@@ -384,6 +395,13 @@ font-size: 40px;
     padding-bottom: 0;
     padding-top: 0;
     font-size: 18px;
+    overflow:hidden;
+    width:300px;
+}
+
+#mainRating {
+    padding-left:8px;
+    padding-bottom:10px;
 }
 
 .buynow img {
