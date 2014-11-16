@@ -221,6 +221,7 @@ function enterframe(){
             square.css('top',newY+'px');
         }
     }
+    /*
     if(slots[0]!=null && slots[1]!=null && slots[2]!=null){
         $("#shareexpand").css({'opacity':'1',"transform":'scale(100)'}).next('.hidden').css('opacity','1');
     } else {
@@ -228,7 +229,7 @@ function enterframe(){
             $("#shareexpand").css({"opacity":"0","transform":'scale(0.1)'}).next('.hidden').css('opacity','0.2');
         }
     }
-
+*/
     if(hold){
         swipeTime++;
         var waitTime=30;
@@ -491,7 +492,8 @@ function touchend(ev){
                 animDir="up";
                 setMovie(mainimg2,getNextMovieIndex());
                 mainimg2.css('top',500);
-                mainimg2.css('display','blocabsolute}
+                mainimg2.css('display','block');
+            }
         }
         if(square.lastIndex==-1 || square.lastIndex==3){
             if(square.lastIndex==3){
@@ -547,8 +549,8 @@ function loadVideo(movieId){
                     var vidhttp = $(vid).children().eq(1).text();
                     //console.log($(vid).children().eq(1).text());
                     //alert(vidhttp);
-                    console.log(vidhttp);
-                    $("#playbtn").attr('src',vidhttp);
+                    //console.log(vidhttp);
+                    //$("#playbtn").attr('src',vidhttp);
                 }
             }
         }

@@ -31,6 +31,7 @@
     background-color:white;
     overflow:hidden;
 }
+
 .tospot {
 width: calc(20% + 5px);
 height: calc(30% - 15px);
