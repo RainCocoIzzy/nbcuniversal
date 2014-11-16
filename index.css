@@ -48,7 +48,9 @@ left: 0px;
     position:absolute;
     left:0px;
     top:20px;
-    background-size: auto;
+    overflow: hidden;
+        background-size: cover;
+            background-position: center center;
     background-repeat: no-repeat;
     transform:scale(1);
     -webkit-transition: width 0.5s, height 0.5s;
@@ -79,7 +81,10 @@ left: 0px;
     top: 0;
     left:0;
     background: black;
-    background-size:auto;
+    /*background-size:auto;*/
+    overflow: hidden;
+        background-size: cover;
+            background-position: center center;
     background-repeat:no-repeat;
 }
 
