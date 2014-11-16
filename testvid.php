@@ -26,7 +26,6 @@
          curl_setopt($ch, CURLOPT_URL, $requestUri);
          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
          $result = curl_exec($ch);
-         
          return $result;
      }
      header('Content-type: text/xml');

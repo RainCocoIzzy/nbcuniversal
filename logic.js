@@ -73,9 +73,12 @@ function Movie(){
 function setMovie(div,movieNum){
     var currMovieObj = movies[movieNum];
     if(currMovieObj.loadedImage){
+        if(div==mainimg){
+            loadVideo(currMovieObj.id);
+            console.log(currMovieObj.id);
+        }
         div.css('background-image',"url('"+currMovieObj.imageObj.src+"')");
         mainTitleDiv.html( currMovieObj.title );
-        console.log(currMovieObj.synopsis);
         synopsisDiv.html( currMovieObj.synopsis );
         updateRating( starRatingsDiv, currMovieObj.rating);
     }
@@ -342,9 +345,6 @@ $(document).ready(function(){
     mainimg2.css('display','none');
 
     window.setInterval(enterframe,10);
-    
-    //$("body").css('display','none');
-    loadVideo(175146);
 });
 
 
@@ -531,6 +531,7 @@ function loadVideo(movieId){
             var parse = $.parseXML(response);
             var $xml = $(parse);
             var vidurl = $xml.find('videohref').text();
+            console.log(vidurl);
             $("#playbtn").attr('src',vidurl);
         }
     }
