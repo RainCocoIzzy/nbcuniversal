@@ -1,6 +1,50 @@
 <html>
-    <script src='js/jquery.min.js'></script>
-    <script src='js/logic.js'></script>
+<script src='js/jquery.min.js'></script>
+<script src='js/logic.js'></script>
+<script>
+var xmlhttp=new XMLHttpRequest();
+xmlDoc=xmlhttp.responseXML;
+xmlhttp.onreadystatechange=function() {
+    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+        var response =xmlhttp.responseText;
+        var parse = $.parseXML(response);
+        var $xml = $(parse);
+        var movies = $xml.find('moviesbypostalcodesearchresponse').find('data').find('movies')[0].children;
+        var k =0;
+        for(var i =0;i<movies.length;i++){
+            var data = movies[i].children;
+            var photos = data['photos'];
+
+            //console.log( $(data).children().namedItem('title'));
+            var title="";
+            var genre="";
+            var synopsis="";
+            var rating="";
+            var photo="";
+            for(var j =0;j<$(data).length;j++){
+                var n = $(data[j]).get(0).nodeName;
+                if(n=='title'){
+                    title = $(data[j]).text();
+                } else if(n=='genre'){
+                    genre = $(data[j]).text();
+                } else if(n=='synopsis' && synopsis==""){
+                    synopsis = $(data[j]).text();
+                } else if(n=='fanrating'){
+                    rating = $(data[j].children[0]).text();
+                } else if(n=='photos'){
+                    var photos = data[j];
+                    photo = $(photos.children[0]).attr('imagehref');
+                }
+            }
+            if(title!="" && genre!="" && synopsis!="" && rating!="" && photo!=""){
+                createMovie(title,genre,synopsis,rating,photo);
+            }
+        }
+    }
+}
+xmlhttp.open("GET","test.php",true);
+xmlhttp.send();
+</script>
     <link rel="stylesheet" type="text/css" href="css/lstyle.css">
     <body style="width:100%; height:100%; margin:0">
         <div id="spot1" class="tospot" style="top:100px"></div>

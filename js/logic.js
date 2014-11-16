@@ -327,3 +327,45 @@ function touchend(ev){
     drag=false;
     hold=false;
 }
+
+var movies = [];
+
+function Movie(){
+    this.title;
+    this.genre;
+    this.synopsis;
+    this.rating;
+    this.photoStr;
+    this.imageObj = new Image();
+    var movie = this;
+    this.loadedImage = false;
+    this.imageObj.onload = function() {
+        movie.loadedImage = true;
+        console.log(movie.title);
+        console.log(movie.genre);
+        console.log(movie.imageObj);
+        console.log(movie.rating);
+        console.log(movie.synopsis);
+    };
+    this.imageObj.onerror = function() {
+        for(var i = 0; movies.length;i++){
+            if(movies[i]==movie){
+                movies.splice(i,1);
+                i--;
+                return;
+            }
+        }
+    }
+}
+
+function createMovie(title,genre,synopsis,rating,photo){
+    var movie = new Movie();
+    movie.title=title;
+    movie.genre=genre;
+    movie.synopsis=synopsis;
+    movie.rating = rating;
+    movie.photoStr = photo;
+    movie.imageObj.src = photo;
+    movies.push(movie);
+}
+
