@@ -46,7 +46,6 @@ $(document).ready( function() {
     createPNG(sources, titles);
 
     $("#facebooklink").click( function() { fb_login() });
-    
     $("#twitterlink").click( function() {
         $.ajax({
               type: "POST",
