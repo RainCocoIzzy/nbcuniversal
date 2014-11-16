@@ -89,5 +89,9 @@ xmlhttp.send();
                 </div>
             </div>
         </div>
+        </div>
+        <div onclick="window.location='./testdrag.html'" id="headerbar">
+            Pick your top 3!
+        </div>
     </body>
 </html>
