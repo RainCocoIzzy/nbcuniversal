@@ -313,6 +313,9 @@ $(document).ready(function(){
             $(synopsisDiv).css("opacity","1");
         }
     });
+    $("#goToCanvas").on('click',function(){
+       // window.location = 
+    });
 
     if(prod){
         $(document).on({ 'touchstart' : touch});
