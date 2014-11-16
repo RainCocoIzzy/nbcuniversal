@@ -48,7 +48,8 @@
             <div class="share" id="postlink">
                 <div class="expand"></div>
             </div>
-            <canvas style="" id="canvas" width="583px" height="306px"></canvas>
+            <div id="top3">#Top3IWantToSee</div>
+            <canvas style="" id="canvas" width="540px" height="283px"></canvas>
         </div>
         <script src="jquery.min.js"></script>
         <script src="index.js"></script>
