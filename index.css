@@ -29,6 +29,11 @@
     right:10px;
     border:2px solid #aaa;
     background-color:white;
+    overflow:hidden;
+}
+
+#tospot4 {
+    top:-100px;
 }
 
 .tospot {
@@ -42,7 +47,7 @@ left: 0px;
 
 #loading {
     margin: auto;
-    position: relative;
+    position: absolute;
     width: 60px;
     z-index: 10;
     top: 150px;

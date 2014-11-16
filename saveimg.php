@@ -14,7 +14,7 @@ if ($im !== false) {
     //imagepng($im);
     //imagedestroy($im);
     echo 'yes';
-    $loc = $_SERVER['DOCUMENT_ROOT']."/dragdrop/created/image".$locpos.".png";
+    $loc = $_SERVER['DOCUMENT_ROOT']."/nbcuniversal/created/image".$locpos.".png";
     imagepng($im, $loc);
     echo $loc;
 }
