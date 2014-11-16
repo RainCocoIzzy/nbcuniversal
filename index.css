@@ -57,10 +57,30 @@ left: 0px;
         -moz-transition: width 0.5s, height 0.5s;
             -o-transition: width 0.5s, height 0.5s;
                 transition: width 0.5s, height 0.5s;
-    -webkit-transition: -webkit-transform 1s;
-        -moz-transition: -moz-transform 1s;
-            -o-transition: -o-transform 1s;
-                transition: transform 1s;
+    -webkit-animation:squareAnim 0.5s;
+    -moz-animation:squareAnim 0.5s;
+    -ms-animation:squareAnim 0.5s;
+    -webkit-animation-fill-mode:forwards; /*Chrome 16+, Safari 4+*/
+    -moz-animation-fill-mode:forwards; /*FF 5+*/
+    -o-animation-fill-mode:forwards; /*Not implemented yet*/
+    -ms-animation-fill-mode:forwards; /*IE 10+*/
+    animation-fill-mode:forwards; /*when the spec is finished*/
+}
+
+@-webkit-keyframes squareAnim {
+    0% { -webkit-transform: scale(1); }
+    80% { -webkit-transform: scale(0.75); }
+    100% { -webkit-transform: scale(0.8); }
+}
+@-moz-keyframes squareAnim {
+    0% { -moz-transform: scale(1); }
+    80% { -moz-transform: scale(0.75); }
+    100% { -moz-transform: scale(0.8); }
+}
+@keyframes squareAnim {
+    0% { transform: scale(1); }
+    80% { transform: scale(0.75); }
+    100% { transform: scale(0.8); }
 }
 
 .imgContainer {
