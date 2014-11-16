@@ -66,7 +66,9 @@ function fb_publish() {
         link: 'http://cuckoohash.com/landingpage.php?m1='+movies[0].id+'&m2='+movies[1].id+"&m3="+movies[2].id,
         picture: imgURL,
         caption: '#Top3IWantToSee',
-    }, function(response){});
+    }, function(response){
+        location.href= 'http://cuckoohash.com/landingpage.php?m1='+movies[0].id+'&m2='+movies[1].id+"&m3="+movies[2].id
+    });
 }
 
 $(document).ready( function() {

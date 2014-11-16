@@ -547,6 +547,7 @@ function loadVideo(movieId){
                     var vidhttp = $(vid).children().eq(1).text();
                     //console.log($(vid).children().eq(1).text());
                     //alert(vidhttp);
+                    console.log(vidhttp);
                     $("#playbtn").attr('src',vidhttp);
                 }
             }
