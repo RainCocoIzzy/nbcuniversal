@@ -46,6 +46,7 @@ function Movie(){
     this.genre;
     this.synopsis;
     this.rating;
+    this.id;
     this.photoStr;
     this.imageObj = new Image();
     var movie = this;
@@ -65,8 +66,6 @@ function Movie(){
         }
     }
 }
-
-//caching divs
 
 function setMovie(div,movieNum){
     var currMovieObj = movies[movieNum];
@@ -466,7 +465,7 @@ function touchend(ev){
 }
 
 
-function createMovie(title,genre,synopsis,rating,photo){
+function createMovie(title,genre,synopsis,rating,photo,id){
     if(photo=="http://images.fandango.com/r94.9/ImageRenderer/750/500/nox.jpg/2148/images/masterrepository/fandango/2148/billye2.jpg"){
         return;
     }
@@ -476,6 +475,7 @@ function createMovie(title,genre,synopsis,rating,photo){
     movie.synopsis=synopsis;
     movie.rating = rating;
     movie.photoStr = photo;
+    movie.id=id;
     movie.imageObj.src = photo;
     movies.push(movie);
     numMovies = movies.length;

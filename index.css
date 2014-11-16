@@ -172,13 +172,20 @@ canvas {
     z-index:2;
 }
 
+.placeholder2{
+    left:33.3%;
+}
+.placeholder3{
+    left:66.6%;
+}
+
 .placeholder {
-    width:33.3333%;
+    width:calc(100%/3);
+    position:absolute;
     height:100%;
-    float:left;
+    top:0px;
     background-size: auto 100%;
     background-position: center;
-    position:relative;
     background-repeat: no-repeat;
     opacity:0;
 }
