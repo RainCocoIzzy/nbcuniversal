@@ -475,7 +475,7 @@ function touchend(ev){
     for(var i =0;i<squares.length;i++){
         var square = squares[i];
         if(square.down){
-            square.css({'height':finalSquareH,'width':finalSquareW});
+            square.addClass("droppedSquare").css({'width':finalSquareW,'height':finalSquareH});
             square.width=finalSquareW;
             square.height=finalSquareH;
 

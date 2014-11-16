@@ -77,6 +77,11 @@ left: 0px;
     animation-fill-mode:forwards; /*when the spec is finished*/
 }
 
+.droppedSquare {
+    transform:none !important;
+    transform:matrix(0, 0, 0, 0, 0, 0) !important;
+}
+
 @-webkit-keyframes squareAnim {
     0% { -webkit-transform: scale(1); }
     80% { -webkit-transform: scale(0.75); }
@@ -92,7 +97,6 @@ left: 0px;
     80% { transform: scale(0.75); }
     100% { transform: scale(0.8); }
 }
-
 
 /* drop square */
 @-webkit-keyframes dropSquare {
@@ -177,7 +181,7 @@ left: 0px;
 z-index: 3;
 color: white;
 border: 2px solid white;
-padding: 9px 17px;
+padding: 10px 18px;
 background-color: rgba(0,0,0,0);
 }
 
