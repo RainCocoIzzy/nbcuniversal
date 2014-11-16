@@ -339,7 +339,7 @@ $(document).ready(function(){
         var spot = $('#spot'+i);
         var topInt = convertPxToInt(spot.css('top'));
         var leftInt = convertPxToInt(spot.css('left'));
-        spots.push (new Rect(leftInt,topInt+(i-1)*3,100,100));
+        spots.push (new Rect(leftInt,topInt,100,100));
     }
 
     mainimg = $("#mainimg");

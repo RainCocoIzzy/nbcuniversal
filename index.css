@@ -93,6 +93,39 @@ left: 0px;
     100% { transform: scale(0.8); }
 }
 
+
+/* drop square */
+@-webkit-keyframes dropSquare {
+    0% { -webkit-transform: scale(1); }
+    80% { -webkit-transform: scale(0.2); }
+    90% { -webkit-transform: scale(0.3); }
+    100% { -webkit-transform: scale(0.25); }
+}
+@-moz-keyframes dropSquare {
+    0% { -moz-transform: scale(1); }
+    80% { -moz-transform: scale(0.75); }
+    100% { -moz-transform: scale(0.8); }
+}
+@keyframes dropSquare {
+    0% { transform: scale(1); }
+    80% { transform: scale(0.2); }
+    90% { transform: scale(0.3); }
+    100% { transform: scale(0.25); }
+}
+
+.dropSquare {
+    -webkit-animation:dropSquare 0.2s;
+    -moz-animation:dropSquare 0.5s;
+    -ms-animation:dropSquare 0.5s;
+    -webkit-animation-fill-mode:forwards; /*Chrome 16+, Safari 4+*/
+    -moz-animation-fill-mode:forwards; /*FF 5+*/
+    -o-animation-fill-mode:forwards; /*Not implemented yet*/
+    -ms-animation-fill-mode:forwards; /*IE 10+*/
+    animation-fill-mode:forwards; /*when the spec is finished*/
+}
+
+
+
 .imgContainer {
     width: calc(80% - 10px);
     width: -webkit-calc(80% - 10px);
