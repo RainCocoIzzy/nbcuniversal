@@ -316,7 +316,7 @@ $(document).ready(function(){
         }
     });
     $("#goToCanvas").on('click',function(){
-       // window.location = 
+        window.location = "./index.php?m1="+slots[0].id+"&m2="+slots[1].id+"&m3="+slots[2].id;
     });
 
     if(prod){
@@ -516,7 +516,7 @@ function createMovie(title,genre,synopsis,rating,photo,id){
     movie.imageObj.src = photo;
     //var post = 'savelib.php?loc='+movie.id+'&url='+movie.photoStr;
     //$.ajax({type:'GET',url:post});
-    console.log(post);
+    //console.log(post);
     movies.push(movie);
     numMovies = movies.length;
 }
