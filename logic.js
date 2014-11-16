@@ -188,6 +188,7 @@ function enterframe(){
     if(!startedAll){
         return;
     } else {
+        $("#loading").hide();
         if(!firstMovie){
             setMovie(mainimg,currMovie);
             firstMovie=true;

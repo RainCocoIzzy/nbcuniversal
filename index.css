@@ -40,6 +40,15 @@ position: absolute;
 left: 0px;
 }
 
+#loading {
+    margin: auto;
+    position: relative;
+    width: 200px;
+    z-index: 10;
+    top: 70px;
+    left: calc(46%);
+}
+
 .square {
     background:#ccc;
     width: calc(80% - 10px);
@@ -57,7 +66,7 @@ left: 0px;
         -moz-transition: width 0.5s, height 0.5s;
             -o-transition: width 0.5s, height 0.5s;
                 transition: width 0.5s, height 0.5s;
-    -webkit-animation:squareAnim 0.5s;
+    -webkit-animation:squareAnim 0.2s;
     -moz-animation:squareAnim 0.5s;
     -ms-animation:squareAnim 0.5s;
     -webkit-animation-fill-mode:forwards; /*Chrome 16+, Safari 4+*/
