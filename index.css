@@ -209,16 +209,11 @@ margin-right: 10px;
 }
 
 .fb_dialog_advanced {
-    padding: 0;
-    -moz-border-radius: 0;
-    -webkit-border-radius: 0px;
-    border-radius: 0px;
+    padding: 0 !important;
+    -moz-border-radius: 0 !important;
+    -webkit-border-radius: 0px !important;
+    border-radius: 0px !important;
 }
-
-.fb_dialog {
-   top:0;
-}
-
 
 .tospot {
 width: 20%;

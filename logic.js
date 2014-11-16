@@ -1,4 +1,4 @@
-var prod = false;
+var prod = true;
 var squares = [];
 var spots = [];
 
@@ -70,6 +70,7 @@ function setMovie(div,movieNum){
     console.log(div + " "+movieNum);
     var currMovieObj = movies[movieNum];
     if(currMovieObj.loadedImage){
+        div.css('background-image',"url('"+currMovieObj.imageObj.src+"')");
         // TODO : div.changehtml
         //currMovieObj.imageObj
         //currMovieObj.genre // etc
