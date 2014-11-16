@@ -140,14 +140,12 @@ background-color: rgba(0,0,0,0);
 }
 
 #spot2 {
-    top: calc(30% - 10px);
-    top: -webkit-calc(30% - 10px);
+    top: 102px;
     background-color:#E67E22;
 }
 
 #spot3 {
-    top: calc(60% - 20px);
-    top: -webkit-calc(60% - 20px);
+    top: 204px;
     background-color:#F1C40E;
 }
 
