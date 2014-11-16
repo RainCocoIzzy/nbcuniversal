@@ -11,22 +11,32 @@ function Movie(){
 }
 var movies = [null,null,null];
 
+var imgs = [null, null, null];
+var responses = 0;
+
 function createMovie(num,title,rating,photo,id){
     if(photo=="http://images.fandango.com/r94.9/ImageRenderer/750/500/nox.jpg/2148/images/masterrepository/fandango/2148/billye2.jpg"){
         return;
     }
     var movie = new Movie();
     movie.title=title;
-    movie.img = "http://danny-yaroslavski.com/dragdrop/lib/image"+id+".png";
+    movie.img;//
+    imgs[num-1] ="./lib/image"+id+".png";
     movie.id=id;
+    var post = 'savelib.php?loc='+movie.id+'&url='+photo;
+    $.ajax({type:'GET',url:post,success:loadRealImg});
     movies[num-1]=movie;
-    console.log(movie.img);
-    if(movies[0]!=null && movies[1]!=null && movies[2]!=null){
-        var sources = { first: movies[0].img, second: movies[1].img, third:movies[2].img};
+    console.log(imgs[num-1]);
+}
+
+function loadRealImg(){
+    responses++;
+    if(responses==3){
+        var sources = { first: imgs[0], second: imgs[1], third:imgs[2]};
         var titles = [movies[0].title,movies[1].title,movies[2].title];
         createPNG(sources, titles);
-    }
 
+    }
 }
 
 function fb_login() {
