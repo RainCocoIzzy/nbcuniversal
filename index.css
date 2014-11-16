@@ -50,6 +50,7 @@ left: 0px;
     top:20px;
     background-size: auto;
     background-repeat: no-repeat;
+    transform:scale(1);
     -webkit-transition: width 0.5s, height 0.5s;
         -moz-transition: width 0.5s, height 0.5s;
             -o-transition: width 0.5s, height 0.5s;
@@ -58,7 +59,6 @@ left: 0px;
         -moz-transition: -moz-transform 1s;
             -o-transition: -o-transform 1s;
                 transition: transform 1s;
-    
 }
 
 .imgContainer {
