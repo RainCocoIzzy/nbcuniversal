@@ -281,7 +281,8 @@ font-size: 40px;
 }
 
 #facebooklink {
-    background-color:rgba(241, 196, 15, 0.5);;
+    background-color:rgba(241, 196, 15, 0.5);
+    bottom: calc(70px * 3 + 6px);
 }
 #facebooklink .expand {
     background-color: #FFEC70;
@@ -289,13 +290,15 @@ font-size: 40px;
 
 #twitterlink {
     background-color:rgba(243, 156, 18, 0.5);
+    bottom: calc(70px * 2 + 4px);
 }
 #twitterlink .expand {
     background-color:rgba(243, 156, 18,1);
 }
 
 #googlelink {
-    background-color:rgba(230, 126, 34, 0.5)
+    background-color:rgba(230, 126, 34, 0.5);
+    bottom: 72px;
 }
 #googlelink .expand {
     background-color:rgba(230, 126, 34, 1);
@@ -303,21 +306,20 @@ font-size: 40px;
 
 #instagramlink {
     background-color:rgba(231, 76, 60, 0.5);
+    bottom:0;
 }
 #instagramlink .expand {
     background-color:rgb(231, 76, 60);
 }
 
 #postlink {
-    background-color:#c0392b;
 }
 
 .share {
     width:17%;
-    height:calc(20% - 4.15px);
-    height:-webkit-calc(20% - 4.15px);
+    height:67px;
     margin-bottom:5px;
-    position:relative;
+    position:absolute;
     box-sizing:border-box;
     text-align:center;
     overflow:hidden;

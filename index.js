@@ -112,9 +112,9 @@ function createPNG(sources, titles) {
     $(".share").click( function() {
         var expand = $(this).find('.expand');
         if( expand.css('z-index') == '-1') {
-            $(this).find('.expand').css({'transform':'scale(100)','z-index':'1'});
+            expand.css({'transform':'scale(100)','z-index':'1'});
         } else {
-            $(this).find('.expand').css({'transform':'scale(0)','z-index':'-1'});
+            expand.css({'transform':'scale(0)','z-index':'-1'});
         }
     });
 
