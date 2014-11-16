@@ -48,7 +48,7 @@
             <div class="share" id="postlink">
                 <div class="expand"></div>
             </div>
-            <canvas style="" id="canvas" width="486px" height="255px"></canvas>
+            <canvas style="" id="canvas" width="583px" height="306px"></canvas>
         </div>
         <script src="jquery.min.js"></script>
         <script src="index.js"></script>
