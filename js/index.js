@@ -1,10 +1,57 @@
-$(document).ready( function() {
+canvas;
 
+function statusChangeCallback(response) {
+    console.log('statusChangeCallback');
+    console.log(response);
+    if (response.status === 'connected') {
+      // Logged into your app and Facebook.
+      fb_publish();
+    } else if (response.status === 'not_authorized') {
+      // The person is logged into Facebook, but not your app.
+      document.getElementById('status').innerHTML = 'Please log ' +
+        'into this app.';
+    } else {
+      // The person is not logged into Facebook, so we're not sure if
+      // they are logged into this app or not.
+      document.getElementById('status').innerHTML = 'Please log ' +
+        'into Facebook.';
+    }
+}
+
+function checkLoginState() {
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+}
+
+
+
+function fb_login() {
+    FB.login(function(response) {
+       console.log(response);
+     }, {scope: 'user_friends'});
+}
+
+function fb_publish() {
+    FB.ui({
+      method: 'feed',
+      link: 'https://www.facebook.com/dialog/feed?app_id=145634995501895&display=popup&caption=An%20example%20caption&link=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2F&redirect_uri=http://dalyagershtein.com/nbcuniversal/images/img1.jpg',
+      caption: '#Top3IWantToSee',
+    }, function(response){});
+}
+
+
+$(document).ready( function() {
+    
     var sources = { first: "images/img1.jpg", second: "images/img2.jpg", third:"images/img3.jpg"};
     var titles = ["BIG HERO 6","Mockingjay","Horrible Bosses"];
     createPNG(sources, titles);
 
-
+    //fb_login();
+  FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+  });
+    
 });
 
 
@@ -39,7 +86,7 @@ function createPNG(sources, titles) {
         }
     });
 
-    var canvas = document.getElementById("canvas");
+    canvas = document.getElementById("canvas");
     var ctx = canvas.getContext("2d");
     
     ctx.font="20px Futura";

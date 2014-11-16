@@ -207,3 +207,41 @@ margin-right: 10px;
         text-align:center;
     }
 }
+
+.fb_dialog_advanced {
+    padding: 0;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+}
+
+.fb_dialog {
+   top:0;
+}
+
+
+.tospot {
+width: 20%;
+height: calc(33.3333% - 4px);
+background: #ff00ee;
+position: relative;
+margin-bottom: 5px;
+}
+
+.square {
+    background:#ccc;
+    width:50px;
+    height:50px;
+    position:absolute;
+    left:0px;
+    top:20px;
+}
+
+.main {
+    width: calc(80% - 20px);
+    height: calc(100% - 10px);
+    position: absolute;
+    top: 5px;
+    left: calc(20% + 10px);
+    background: #cccddd;
+}

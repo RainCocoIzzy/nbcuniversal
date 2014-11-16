@@ -2,15 +2,30 @@
     <head>
         <title></title>
         <link href="css/index.css" rel="stylesheet"/>
-        <link rel="stylesheet" type="text/css" href="lstyle.css">
     </head>
     <body id="index">
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '717277388349929',
+      xfbml      : true,
+      version    : 'v2.2'
+    });
+  };
 
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
 
-        <div class="container" id="main">
-            <div id="spot1" class="tospot" style="top:100px"></div>
-            <div id="spot2" class="tospot" style="top:250px"></div>
-            <div id="spot3" class="tospot" style="top:400px"></div>
+        <div class="container" id="main" style="display:none">
+            <div id="spot1" class="tospot"></div>
+            <div id="spot2" class="tospot"></div>
+            <div id="spot3" class="tospot"></div>
             <div id="spot4" class="tospot" style="top:550px;left:200px"></div>
             <div id="mainimg" class="main"></div>
             <div id="mainimg2" class="main" style="background:red"></div>
@@ -18,7 +33,7 @@
         </div>
 
 
-        <div class="container" id="postlist" style="display:none">
+        <div class="container" id="postlist">
             <div class="share" id="facebooklink">
                 <div class="expand"></div>
                 <img class="icon" src="images/facebook.png"/>
@@ -43,6 +58,6 @@
         </div>
         <script src="js/jquery.min.js"></script>
         <script src="js/index.js"></script>
-        <script src="logic.js"></script>
+        <script src="js/logic.js"></script>
     </body>
 </html>
