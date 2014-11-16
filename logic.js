@@ -24,6 +24,7 @@ var swipeTime=0;
 var hold = false;
 var drag = false;
 
+var movies = [];
 var numMovies = 0;
 var currMovie = 0;
 var currMovie2 = 0;
@@ -52,7 +53,6 @@ function Movie(){
     this.imageObj.onload = function() {
         movie.loadedImage = true;
         startedAll=true;
-        /*console.log(movie.title);console.log(movie.genre);console.log(movie.imageObj);console.log(movie.rating);console.log(movie.synopsis);*/
     };
     this.imageObj.onerror = function() {
         for(var i = 0; movies.length;i++){
@@ -69,7 +69,6 @@ function Movie(){
 //caching divs
 
 function setMovie(div,movieNum){
-    console.log(div + " "+movieNum);
     var currMovieObj = movies[movieNum];
     if(currMovieObj.loadedImage){
         div.css('background-image',"url('"+currMovieObj.imageObj.src+"')");
@@ -310,7 +309,7 @@ $(document).ready(function(){
 
     window.setInterval(enterframe,10);
     
-    $("body").css('display','none');
+    //$("body").css('display','none');
 });
 
 
@@ -364,8 +363,8 @@ function touchmove(ev){
             if(Math.abs(ey-startY)>minmove){
                 hold=false;
             }
-            var miny = -250;
-            var maxy = 250
+            var miny = -100;
+            var maxy = 100;
             mainimg.css('top',ey-startY);
             if(ey-startY<miny){
                 setMovie(mainimg2,getNextMovieIndex());
@@ -462,9 +461,11 @@ function touchend(ev){
     hold=false;
 }
 
-var movies = [];
 
 function createMovie(title,genre,synopsis,rating,photo){
+    if(photo=="http://images.fandango.com/r94.9/ImageRenderer/750/500/nox.jpg/2148/images/masterrepository/fandango/2148/billye2.jpg"){
+        return;
+    }
     var movie = new Movie();
     movie.title=title;
     movie.genre=genre;
@@ -473,4 +474,5 @@ function createMovie(title,genre,synopsis,rating,photo){
     movie.photoStr = photo;
     movie.imageObj.src = photo;
     movies.push(movie);
+    numMovies = movies.length;
 }
