@@ -166,10 +166,20 @@ body {
 }
 
 canvas {
-    background-color:black;
+    background-color:white;
     position:absolute;
-    top:0;
-    right:0;
+    bottom:5px;
+    right: 5px;
+}
+
+#top3 {
+position: absolute;
+width: 80%;
+text-align: center;
+top: 10px;
+right: 0;
+color: white;
+font-size: 40px;
 }
 
 #facebooklink {
