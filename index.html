@@ -4,32 +4,45 @@
         <link href="css/index.css" rel="stylesheet"/>
         <link rel="stylesheet" type="text/css" href="lstyle.css">
     </head>
-    <body>
+    <body id="index">
 
 
-        <div class="container" style="display:none">
+        <div class="container" id="main">
+            <div id="spot1" class="tospot" style="top:100px"></div>
+            <div id="spot2" class="tospot" style="top:250px"></div>
+            <div id="spot3" class="tospot" style="top:400px"></div>
+            <div id="spot4" class="tospot" style="top:550px;left:200px"></div>
+            <div id="mainimg" class="main"></div>
+            <div id="mainimg2" class="main" style="background:red"></div>
+            
         </div>
 
-        <div class="container" id="postlist">
+
+        <div class="container" id="postlist" style="display:none">
             <div class="share" id="facebooklink">
+                <div class="expand"></div>
                 <img class="icon" src="images/facebook.png"/>
             </div>
             <div class="share" id="twitterlink">
+                <div class="expand"></div>
                 <img class="icon" src="images/twitter.png"/>
             </div>
             <div class="share" id="googlelink">
+                <div class="expand"></div>
                 <img class="icon" src="images/google.png"/>
             </div>
             <div class="share" id="instagramlink">
+                <div class="expand"></div>
                 <img class="icon" src="images/instagram.png"/>
             </div>
             <div class="share" id="postlink">
-                <img class="icon" src="images/facebook.png"/>
+                <div class="expand"></div>
             </div>
             
             <canvas style="" id="canvas" width="550px" height="375px"></canvas>
         </div>
         <script src="js/jquery.min.js"></script>
         <script src="js/index.js"></script>
+        <script src="logic.js"></script>
     </body>
 </html>

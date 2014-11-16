@@ -1,6 +1,7 @@
 body {
     padding:0;
     margin:0;
+    font-family:futura;
 }
 
 .container {
@@ -20,23 +21,31 @@ canvas {
 }
 
 #facebooklink {
-    background-color:#f1c40f;
+    background-color:rgba(241, 196, 15, 0.5);;
+}
+#facebooklink .expand {
+    background-color: #FFEC70;
 }
 
 #twitterlink {
-    background-color:#f39c12;
+    background-color:rgba(243, 156, 18, 0.5);
+}
+#twitterlink .expand {
+    background-color:rgba(243, 156, 18,1);
 }
 
 #googlelink {
-    background-color:#e67e22;
+    background-color:rgba(230, 126, 34, 0.5)
 }
-
-#pinterestlink {
-    background-color:#d35400;
+#googlelink .expand {
+    background-color:rgba(230, 126, 34, 1);
 }
 
 #instagramlink {
-    background-color:#e74c3c;
+    background-color:rgba(231, 76, 60, 0.5);
+}
+#instagramlink .expand {
+    background-color:rgb(231, 76, 60);
 }
 
 #postlink {
@@ -50,17 +59,151 @@ canvas {
     position:relative;
     box-sizing:border-box;
     text-align:center;
+    overflow:hidden;
+}
+
+.expand {
+    margin-left: 50%;
+    margin-top: 20%;
+    position: absolute;
+    padding: 5px;
+    z-index:-1;
+    transition:transform 1s;
+    border-radius: 50%;
 }
 
 .icon {
     height:50%;
     position:relative;
     margin-top:calc(12%);
+    z-index:2;
 }
 
-.share::after {
-    content:"";
-    height:40px;
-    width:40px;
-    background-color:white;
+.placeholder {
+    width:33.3333%;
+    height:100%;
+    float:left;
+    background-size: auto 100%;
+    background-position: center;
+    position:relative;
+    background-repeat: no-repeat;
+    opacity:0;
+}
+
+.bottomsection {
+    position:absolute;
+    bottom:0;
+    width:100%;
+
+    background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.75) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.75))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.75) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.75) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.75) 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.75) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#bf000000',GradientType=0 ); /* IE6-9 */
+
+}
+
+.stars img {
+    height:30px;
+    padding:5px;
+}
+
+.stars {
+    padding:10px;
+}
+
+.title {
+    color:white;
+    padding: 20px;
+    padding-bottom: 0;
+    font-size: 25px;
+}
+
+.buynow img {
+float: left;
+height: 25px;
+margin-right: 10px;
+}
+
+.buytext {
+    padding-top: 7.5px;
+}
+
+.buynow {
+    width: 150px;
+    background-color: #F15500;
+    border-radius: 5px;
+    color: white;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    padding: 10px;
+    font-family:proxima-nova, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    transition: transform 0.5s, background-color 0.5s ease;
+}
+
+@-webkit-keyframes pop-in {
+    0% { opacity: 0; -webkit-transform: scale(0.5); }
+    75% {opacity: 1; -webkit-transform: scale(1.2); }
+    100% { opacity: 1; -webkit-transform: scale(1); }
+}
+@-moz-keyframes pop-in {
+    0% { opacity: 0; -moz-transform: scale(0.5); }
+    75% {opacity: 1; -moz-transform: scale(1.2); }
+    100% { opacity: 1; -moz-transform: scale(1); }
+}
+@keyframes pop-in {
+    0% { opacity: 0; transform: scale(0.5); }
+    75% {opacity: 1; -moz-transform: scale(1.1); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+
+#first, #second, #third {
+    -webkit-animation:pop-in 0.4s;
+    -moz-animation:pop-in 0.4s;
+    -ms-animation:pop-in 0.4s;
+    -webkit-animation-fill-mode:forwards; /*Chrome 16+, Safari 4+*/
+    -moz-animation-fill-mode:forwards; /*FF 5+*/
+    -o-animation-fill-mode:forwards; /*Not implemented yet*/
+    -ms-animation-fill-mode:forwards; /*IE 10+*/
+    animation-fill-mode:forwards; /*when the spec is finished*/
+}
+
+#second {
+    -webkit-animation-delay: 0.2s; /* Chrome, Safari, Opera */
+    animation-delay: 0.2s;
+}
+
+#third {
+    -webkit-animation-delay: 0.4s; /* Chrome, Safari, Opera */
+    animation-delay: 0.4s;
+}
+
+
+.btn:active {
+    transform:scale(1.3);
+}
+
+.buynow:active {
+    background-color:#e67e22;
+}
+
+@media only screen 
+    and (min-device-width : 375px) 
+    and (max-device-width : 667px) 
+    and (orientation : landscape) 
+    and (-webkit-min-device-pixel-ratio : 2) { 
+    .buynow {
+        position:relative;
+        margin:20px auto;
+    }
+    .bottomsection {
+        text-align:center;
+    }
 }
