@@ -29,6 +29,7 @@
 </script>
 
         <div class="container" id="postlist">
+            <img id="loading2" src="images/loading2.gif"/>
             <div class="share" id="facebooklink">
                 <div class="expand"></div>
                 <img class="icon" src="images/facebook.png"/>

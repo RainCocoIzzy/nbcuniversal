@@ -34,10 +34,10 @@ function createMovie(num,title,rating,photo,id){
 function loadRealImg(){
     responses++;
     if(responses==3){
+        $("#loading2").hide();
         var sources = { first: imgs[0], second: imgs[1], third:imgs[2], firstplace:'images/first.png',secondplace:'images/second.png',thirdplace:'images/third.png'};
         var titles = [movies[0].title,movies[1].title,movies[2].title];
         createPNG(sources, titles);
-
     }
 }
 

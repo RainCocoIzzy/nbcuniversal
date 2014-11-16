@@ -50,6 +50,15 @@ left: 0px;
     left: calc(46%);
 }
 
+#loading2 {
+    margin: auto;
+    position: absolute;
+    width: 60px;
+    z-index: 10;
+    top: 195px;
+    left: calc(54%);
+}
+
 .square {
     background:#ccc;
     width: calc(80% - 10px);
