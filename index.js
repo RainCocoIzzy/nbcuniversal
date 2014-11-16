@@ -141,7 +141,7 @@ function createPNG(sources, titles) {
         var imgSize = getSize(frameW,frameH,images.first.width,images.first.height);
         ctx.drawImage(images.first, 0, 0, imgSize[0],imgSize[1], pad, pad, images.first.width, images.first.height);
         ctx.fillStyle=lingrad2;
-        ctx.fillRect(pad,frameH-70+pad,frameW,70);
+        ctx.fillRect(pad,frameH-76+pad,frameW,76);
         ctx.fillStyle="white";
         ctx.fillText(titles[0],cw/6,ch-pad*5);
         ctx.drawImage(images.firstplace, cw*(3/5)-images.firstplace.width, ch-pad-images.firstplace.height);
@@ -152,16 +152,18 @@ function createPNG(sources, titles) {
         imgSize = getSize(frameW,frameH,images.second.width,images.second.height);
         ctx.drawImage(images.second, 0, 0, imgSize[0],imgSize[1], cw*(3/5)+pad, pad, images.second.width, images.second.height);
         ctx.fillStyle=lingrad2;
-        ctx.fillRect(pad,frameH-70+pad,frameW,70);
+        ctx.fillRect(cw*(3/5)+pad,frameH-76+pad,frameW,76);
         ctx.fillStyle="white";
         ctx.fillText(titles[1],cw*(4/6),ch*(3/5)-pad*5);
         ctx.drawImage(images.secondplace, cw-pad-images.secondplace.width, ch*(3/5)-images.secondplace.height);
 
         //Third
-        imgSize = getSize(cw*(3/5)-120,ch*(2/5)-pad2,images.third.width,images.third.height);
+        frameW = cw*(3/5)-120;
+        frameH = ch*(2/5)-pad2;
+        imgSize = getSize(frameW,frameH,images.third.width,images.third.height);
         ctx.drawImage(images.third, 0, 0, imgSize[0], imgSize[1], cw*(3/5)+pad, ch*(3/5)+pad, images.third.width, images.third.height);
         ctx.fillStyle=lingrad2;
-        ctx.fillRect(pad,frameH-70+pad,frameW,70);
+        ctx.fillRect(cw*(3/5)+pad,ch-76-pad,frameW,76);
         ctx.fillStyle="white";
         ctx.fillText(titles[2],cw*(4/6),ch-pad*5);
         ctx.drawImage(images.thirdplace, cw-pad-images.thirdplace.width, ch-pad-images.thirdplace.height);
