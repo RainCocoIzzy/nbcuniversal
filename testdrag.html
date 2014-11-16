@@ -25,7 +25,6 @@
             var data = $(movies).children().eq(i).get(0);
             var photos = data['photos'];
             var id = $(data).attr('id');
-
             var title="";
             var genre="";
             var synopsis="";
@@ -47,7 +46,7 @@
                     photo = $(photos).children().eq(0).attr('imagehref');
                 }
             }
-            if(title!="" && genre!="" && synopsis!="" && rating!="" && photo!=""){
+            if(title!="" && genre!="" && synopsis!="" && rating!="" && photo!="" && id!=""){
                 createMovie(title,genre,synopsis,rating,photo,id);
             }
         }

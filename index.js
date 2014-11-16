@@ -1,5 +1,34 @@
 var imgURL;
 
+function Movie(){
+    this.title="";
+    this.rating="";
+    this.img="";
+    this.imageObj= new Image();
+    this.imageObj.setAttribute('crossOrigin', 'anonymous');
+    this.id="";
+    this.url = ""
+}
+var movies = [null,null,null];
+
+function createMovie(num,title,rating,photo,id){
+    if(photo=="http://images.fandango.com/r94.9/ImageRenderer/750/500/nox.jpg/2148/images/masterrepository/fandango/2148/billye2.jpg"){
+        return;
+    }
+    var movie = new Movie();
+    movie.title=title;
+    movie.img = "http://danny-yaroslavski.com/dragdrop/lib/image"+id+".png";
+    movie.id=id;
+    movies[num-1]=movie;
+    console.log(movie.img);
+    if(movies[0]!=null && movies[1]!=null && movies[2]!=null){
+        var sources = { first: movies[0].img, second: movies[1].img, third:movies[2].img};
+        var titles = [movies[0].title,movies[1].title,movies[2].title];
+        createPNG(sources, titles);
+    }
+
+}
+
 function fb_login() {
    FB.getLoginStatus(function(response) {
      if (response.status === 'connected') {
@@ -22,16 +51,13 @@ function fb_login() {
 function fb_publish() {
     FB.ui({
         method: 'feed',
-        link: 'http://danny-yaroslavski.com/dragdrop/landingpage.html',
+        link: 'http://danny-yaroslavski.com/dragdrop/landingpage.php?m1='+movies[0].id+'&m2='+movies[1].id+"&m3="+movies[2].id,
         picture: imgURL,
         caption: '#Top3IWantToSee',
     }, function(response){});
 }
 
 $(document).ready( function() {
-    var sources = { first: "images/img1.jpg", second: "images/img2.jpg", third:"images/img3.jpg"};
-    var titles = ["BIG HERO 6","Mockingjay","Horrible Bosses"];
-    createPNG(sources, titles);
 
     $("#facebooklink").click( function() { 
         fb_login();
@@ -71,7 +97,6 @@ function loadImages(sources, callback) {
 var randomNum;
 
 function createPNG(sources, titles) {
-
     $(".share").click( function() {
         var expand = $(this).find('.expand');
         if( expand.css('z-index') == '-1') {
@@ -94,8 +119,6 @@ function createPNG(sources, titles) {
 
 
     loadImages(sources, function(images) {
-
-        //First
         ctx.drawImage(images.first, 0, 0, images.first.width, images.first.height, pad, pad, cw*(3/5)-pad, ch-pad2);
         ctx.fillText(titles[0],cw/6,ch-pad*5);
 

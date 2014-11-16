@@ -496,6 +496,9 @@ function createMovie(title,genre,synopsis,rating,photo,id){
     movie.photoStr = photo;
     movie.id=id;
     movie.imageObj.src = photo;
+    //var post = 'savelib.php?loc='+movie.id+'&url='+movie.photoStr;
+    //$.ajax({type:'GET',url:post});
+    console.log(post);
     movies.push(movie);
     numMovies = movies.length;
 }
