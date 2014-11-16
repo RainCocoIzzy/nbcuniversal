@@ -3,7 +3,6 @@
     <head>
         <title></title>
         <link href="index.css" rel="stylesheet"/>
-        <link rel="stylesheet" type="text/css" href="lstyle.css"/>
         <script src="jquery.min.js"></script>
         <script src="landingpage.js"/></script>
     </head>

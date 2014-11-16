@@ -38,6 +38,9 @@ function createLanding() {
     var first = $("#first");
     var second = $("#second");
     var third = $("#third");
+    first.addClass("first"); 
+    second.addClass("second secondDelay"); 
+    third.addClass("third thirdDelay"); 
 
     $("#firstbutton").click(function(){
         window.open(movies[0].url);

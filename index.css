@@ -315,7 +315,7 @@ margin-right: 10px;
 }
 
 
-#first, #second, #third {
+.first, .second, .third {
     -webkit-animation:pop-in 0.4s;
     -moz-animation:pop-in 0.4s;
     -ms-animation:pop-in 0.4s;
@@ -326,12 +326,12 @@ margin-right: 10px;
     animation-fill-mode:forwards; /*when the spec is finished*/
 }
 
-#second {
+.secondDelay {
     -webkit-animation-delay: 0.2s; /* Chrome, Safari, Opera */
     animation-delay: 0.2s;
 }
 
-#third {
+.thirdDelay {
     -webkit-animation-delay: 0.4s; /* Chrome, Safari, Opera */
     animation-delay: 0.4s;
 }
