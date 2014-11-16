@@ -129,20 +129,37 @@ function createPNG(sources, titles) {
 
 
     loadImages(sources, function(images) {
+        var lingrad2 = ctx.createLinearGradient(0,0,0,70);
+            lingrad2.addColorStop(0, 'rgba(0,0,0,0)');
+            lingrad2.addColorStop(1, 'rgba(0,0,0,0.3)');
+
         //First
-        ctx.drawImage(images.first, 0, 0, images.first.width, images.first.height, pad, pad, cw*(3/5)-pad, ch-pad2);
+        var frameW = cw*(3/5)-pad;
+        var frameH = ch-pad2;
+        var imgSize = getSize(frameW,frameH,images.first.width,images.first.height);
+        ctx.drawImage(images.first, 0, 0, imgSize[0],imgSize[1], pad, pad, images.first.width, images.first.height);
+        ctx.fillStyle=lingrad2;
+        ctx.fillRect(pad,frameH-70+pad,frameW,70);
         ctx.fillStyle="white";
         ctx.fillText(titles[0],cw/6,ch-pad*5);
         ctx.drawImage(images.firstplace, cw*(3/5)-images.firstplace.width, ch-pad-images.firstplace.height);
 
         //Second
-        ctx.drawImage(images.second, 0, 0, images.second.width, images.second.height, cw*(3/5)+pad, pad, cw*(3/5)-120, ch*(3/5)-pad);
+        frameW = cw*(3/5)-120;
+        frameH = ch*(3/5)-pad;
+        imgSize = getSize(frameW,frameH,images.second.width,images.second.height);
+        ctx.drawImage(images.second, 0, 0, imgSize[0],imgSize[1], cw*(3/5)+pad, pad, images.second.width, images.second.height);
+        ctx.fillStyle=lingrad2;
+        ctx.fillRect(pad,frameH-70+pad,frameW,70);
         ctx.fillStyle="white";
         ctx.fillText(titles[1],cw*(4/6),ch*(3/5)-pad*5);
         ctx.drawImage(images.secondplace, cw-pad-images.secondplace.width, ch*(3/5)-images.secondplace.height);
 
         //Third
-        ctx.drawImage(images.third, 0, 0, images.third.width, images.third.height, cw*(3/5)+pad, ch*(3/5)+pad, cw*(3/5)-120, ch*(2/5)-pad2);
+        imgSize = getSize(cw*(3/5)-120,ch*(2/5)-pad2,images.third.width,images.third.height);
+        ctx.drawImage(images.third, 0, 0, imgSize[0], imgSize[1], cw*(3/5)+pad, ch*(3/5)+pad, images.third.width, images.third.height);
+        ctx.fillStyle=lingrad2;
+        ctx.fillRect(pad,frameH-70+pad,frameW,70);
         ctx.fillStyle="white";
         ctx.fillText(titles[2],cw*(4/6),ch-pad*5);
         ctx.drawImage(images.thirdplace, cw-pad-images.thirdplace.width, ch-pad-images.thirdplace.height);
@@ -167,3 +184,16 @@ function createPNG(sources, titles) {
     });
 }
 
+function getSize(frameW,frameH,imgW,imgH) {
+    /*var rf = frameW/frameH;
+    var ri = imgW/imgH;
+    return rf < ri ? [imgW * frameH/imgH,frameH] : [frameW, imgH * frameW/imgW];
+    */
+    var scale = 1;
+    var ratioX = imgW/frameW;
+    var ratioY = imgH/frameH;
+
+    if(ratioX < 1) scale = 1/ratioX;
+    if(ratioY*scale < 1) scale *= 1/ratioY;
+    return [scale*imgW*ratioX,scale*imgH*ratioY];
+}
