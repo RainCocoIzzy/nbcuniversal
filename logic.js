@@ -73,7 +73,8 @@ function setMovie(div,movieNum){
     if(currMovieObj.loadedImage){
         div.css('background-image',"url('"+currMovieObj.imageObj.src+"')");
         mainTitleDiv.html( currMovieObj.title );
-        synopsysDiv.html( currMovieObj.synopsys );
+        console.log(currMovieObj.synopsis);
+        synopsisDiv.html( currMovieObj.synopsis );
         updateRating( starRatingsDiv, currMovieObj.rating);
     }
 }
@@ -282,11 +283,17 @@ function createSquare(sx,sy){
 
 $(document).ready(function(){
     mainTitleDiv = $("#mainTitle");
-    synopsysDiv = $("#synopsys");
+    synopsisDiv = $("#synopsis");
     starRatingsDiv = $("#mainRating");
    
-    $("#info").on('click touchstart', function() {
-        $(this).css({"border":"0","transform":"scale(100)"});
+    $("#iinfo").on('click touchstart', function() {
+        if( $(synopsisDiv).css("opacity") == "1") {
+            $("#info").css({"transform":"scale(1)","-webkit-transform":"scale(1)","-moz-transform": "scale(1)","-ms-transform":"scale(1)","-o-transform":"scale(1)"});
+            $(synopsisDiv).css("opacity","0");
+        } else {
+            $("#info").css({"transform":"scale(100)","-webkit-transform":"scale(100)","-moz-transform": "scale(100)","-ms-transform":"scale(100)","-o-transform":"scale(100)"});
+            $(synopsisDiv).css("opacity","1");
+        }
     });
 
     if(prod){
