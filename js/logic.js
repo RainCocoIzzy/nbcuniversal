@@ -24,6 +24,13 @@ var swipeTime=0;
 var hold = false;
 var drag = false;
 
+var numMovies = 0;
+var currMovie = 0;
+var currMovie2 = 0;
+
+var startedAll = false;
+var firstMovie = false;
+
 function Rect(x,y,w,h){
     this.x=x;
     this.y=y;
@@ -31,6 +38,72 @@ function Rect(x,y,w,h){
     this.h=h;
     this.centerx = x+w/2;
     this.centery = y+h/2;
+}
+
+function Movie(){
+    this.title;
+    this.genre;
+    this.synopsis;
+    this.rating;
+    this.photoStr;
+    this.imageObj = new Image();
+    var movie = this;
+    this.loadedImage = false;
+    this.imageObj.onload = function() {
+        movie.loadedImage = true;
+        startedAll=true;
+        /*console.log(movie.title);console.log(movie.genre);console.log(movie.imageObj);console.log(movie.rating);console.log(movie.synopsis);*/
+    };
+    this.imageObj.onerror = function() {
+        for(var i = 0; movies.length;i++){
+            if(movies[i]==movie){
+                movies.splice(i,1);
+                i--;
+                numMovies = movies.length;
+                return;
+            }
+        }
+    }
+}
+
+function setMovie(div,movieNum){
+    console.log(div + " "+movieNum);
+    var currMovieObj = movies[movieNum];
+    if(currMovieObj.loadedImage){
+        // TODO : div.changehtml
+        //currMovieObj.imageObj
+        //currMovieObj.genre // etc
+    }
+}
+
+function getPrevMovieIndex(){
+    if(currMovie-1<0){
+        return movies.length-1;
+    } else {
+        return currMovie-1;
+    }
+}
+
+function getNextMovieIndex(){
+    if(currMovie+1>numMovies-1){
+        return 0;
+    } else {
+        return currMovie+1;
+    }
+}
+
+function prevMovie(){
+    currMovie = currMovie-1;
+    if(currMovie<0){
+        currMovie=numMovies-1;
+    }
+}
+
+function nextMovie(){
+    currMovie = currMovie+1;
+    if(currMovie>numMovies-1){
+        currMovie=0;
+    }
 }
 
 function updateEmptySlots(){
@@ -91,6 +164,14 @@ function convertPxToInt(pxStr){
 }
 
 function enterframe(){
+    if(!startedAll){
+        return;
+    } else {
+        if(!firstMovie){
+            setMovie(mainimg,currMovie);
+            firstMovie=true;
+        }
+    }
     if(!maindown){
         updateEmptySlots(0);
     }
@@ -117,6 +198,7 @@ function enterframe(){
             swiping=false;
             if(!drag){
                 createSquare(startX,startY);
+                mainimg.css('display','none');
                 drag=true;
             }
         }
@@ -141,6 +223,14 @@ function enterframe(){
         if(newLoc==0){
             animating=false;
             mainimg.css('top',0);
+            mainimg.css('display','block');
+            if(animDir=="up"){
+                nextMovie();
+                setMovie(mainimg,currMovie);
+            } else {
+                prevMovie();
+                setMovie(mainimg,currMovie);
+            }
             mainimg2.css('top',0);
             mainimg2.css('display','none');
             swiping=false;
@@ -161,6 +251,8 @@ function createSquare(sx,sy){
     var name = 'square'+Math.round(Math.random()*1000000);
     square.setAttribute('id',name);
     var square = $('#'+name);
+    square.movie = movies[currMovie];
+    movies.splice(currMovie,1);
     square.down=true;
     square.diffX=25;
     square.diffY=25;
@@ -199,6 +291,7 @@ $(document).ready(function(){
     mainimg2.css('display','none');
 
     window.setInterval(enterframe,10);
+
 });
 
 
@@ -256,11 +349,13 @@ function touchmove(ev){
             var maxy = 250
             mainimg.css('top',ey-startY);
             if(ey-startY<miny){
+                setMovie(mainimg2,getNextMovieIndex());
                 animating=true;
                 animDir="up";
                 mainimg2.css('top',500);
                 mainimg2.css('display','block');
             } else if(ey-startY>maxy){
+                setMovie(mainimg2,getPrevMovieIndex());
                 animating=true;
                 animDir="down";
                 mainimg2.css('top',-500);
@@ -314,16 +409,49 @@ function touchend(ev){
     ev.preventDefault();
     for(var i =0;i<squares.length;i++){
         var square = squares[i];
-        square.down=false;
+        if(square.down){
+            if(square.lastIndex==-1){
+                if(movies[currMovie]!=square.movie){
+                    movies.splice(currMovie,0,square.movie);
+                    setMovie(mainimg,currMovie);
+                }
+                mainimg.css('display','block');
+                movies.splice(currMovie,0,square.movie);
+            } else {
+                prevMovie();
+                animating=true;
+                animDir="up";
+                setMovie(mainimg2,getNextMovieIndex());
+                mainimg2.css('top',500);
+                mainimg2.css('display','block');
+            }
+        }
         if(square.lastIndex==-1 || square.lastIndex==3){
+            if(square.lastIndex==3){
+                movies.push(square.movie);
+            }
             squares.splice(i,1);
             square.remove();
             i--;
         }
+        square.down=false;
     }
     maindown=false;
     swiping=false;
     swipeTime=0;
     drag=false;
     hold=false;
+}
+
+var movies = [];
+
+function createMovie(title,genre,synopsis,rating,photo){
+    var movie = new Movie();
+    movie.title=title;
+    movie.genre=genre;
+    movie.synopsis=synopsis;
+    movie.rating = rating;
+    movie.photoStr = photo;
+    movie.imageObj.src = photo;
+    movies.push(movie);
 }
