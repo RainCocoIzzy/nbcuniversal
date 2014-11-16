@@ -43,10 +43,10 @@ left: 0px;
 #loading {
     margin: auto;
     position: relative;
-    width: 200px;
+    width: 60px;
     z-index: 10;
-    top: 70px;
-    left: calc(46%);
+    top: 150px;
+    left: calc(54%);
 }
 
 #loading2 {
@@ -83,6 +83,7 @@ left: 0px;
     -o-animation-fill-mode:forwards; /*Not implemented yet*/
     -ms-animation-fill-mode:forwards; /*IE 10+*/
     animation-fill-mode:forwards; /*when the spec is finished*/
+    z-index:3;
 }
 
 .droppedSquare {
