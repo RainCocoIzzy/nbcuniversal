@@ -90,8 +90,11 @@ xmlhttp.send();
             </div>
         </div>
         </div>
-        <div onclick="window.location='./testdrag.html'" id="headerbar">
+        <div id="headerbar">
+            <img src="images/top3logo.png" style="margin-top:-5px; margin-bottom:5px;"/>
+            <div id="headerbtn" onclick="window.location='./testdrag.html'">
             Pick your top 3!
+            </div>
         </div>
     </body>
 </html>
